@@ -1,37 +1,10 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import InteractiveWelcome from '../components/InteractiveWelcome.jsx';
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>cLc Labs</title>
-    <style>
-      .box {
-        width: 100px;
-        height: 100px;
-        background: black;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>cLc Labs<h1/>
-    <input type="checkbox" />
-    <div class="box"></div>
-    <script>
-      import gsap from "gsap";
-
-      const element = document.querySelector(
-        '[type="checkbox"]'
-      ) as HTMLInputElement;
-
-      element?.addEventListener("change", () => {
-        if (element.checked) gsap.to(".box", { x: 200 });
-        else gsap.to(".box", { x: 0 });
-      });
-    </script>
-  </body>
-</html>
+<Layout title="cLc Labs - Welcome">
+  <main class="flex flex-col items-center justify-center p-4">
+    <InteractiveWelcome client:load />
+  </main>
+</Layout>
