@@ -9,17 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/react": "^4.3.0",
+    "@astrojs/preact": "^4.1.0",
+    "@astrojs/sitemap": "^3.4.1",
     "@tailwindcss/vite": "^4.1.11",
-    "@types/react": "^19.1.8",
-    "@types/react-dom": "^19.1.6",
-    "astro": "^5.11.0",
-    "gsap": "^3.13.0",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "astro": "^5.11.1",
+    "preact": "^10.26.9",
     "tailwindcss": "^4.1.11"
-  },
-  "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16"
   }
 }
