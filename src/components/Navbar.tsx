@@ -31,6 +31,13 @@ const Navbar: React.FC = () => {
 
             {/* Mobile full-screen menu */}
             <div className={`fixed inset-0 bg-black flex-col justify-center items-center transition-transform duration-300 z-20 md:hidden flex ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+                {/* Close button for the mobile menu */}
+                <div 
+                    className="absolute top-6 right-6 text-white text-3xl cursor-pointer"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                >
+                    ×
+                </div>
                 <a href="#" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">Work</a>
                 <a href="#" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">About</a>
                 <a href="#" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">Contact</a>
