@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+/* A simple CSS reset to ensure consistent box-sizing across browsers */
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --white: white;
+  --black: black;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-family: sans-serif;
+}
+
+body {
+  cursor: none;
+  font-family: 'Neuemontreal', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}

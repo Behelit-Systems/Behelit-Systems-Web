@@ -1,16 +1,17 @@
+<!--
+// =========================================================
+//  File: src/pages/index.astro
+//
+//  This is the main home page of your Astro site.
+//  It uses the Layout and HeroSection components.
+// =========================================================
+-->
+---
+import Layout from '../layouts/Layout.astro';
+import HeroSection from '../components/HeroSection.tsx';
 ---
 
----
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Behelit Systems</title>
-	</head>
-	<body>
-		<h1>I apologize for the unfinished website since im doing this all alone :((( - Gabe Chew</h1>
-	</body>
-</html>
+<Layout title="Behelit Systems">
+    <!-- Render the React component and hydrate it on the client side -->
+    <HeroSection client:load />
+</Layout>
