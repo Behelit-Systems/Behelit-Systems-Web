@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                     className="hamburger-icon text-3xl leading-none transition-transform duration-300 md:hidden block cursor-pointer"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                    ☰
+                    {isMobileMenuOpen ? '×' : '☰'}
                 </div>
             </nav>
 
