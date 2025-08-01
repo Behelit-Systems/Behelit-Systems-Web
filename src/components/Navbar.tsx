@@ -12,17 +12,19 @@ const Navbar: React.FC = () => {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 w-full flex justify-start items-center p-6 z-10 font-['Inter'] md:justify-start justify-between">
-                <div className="md:flex hidden items-center">
-                    <a href="#" className="text-white text-base font-bold mr-8 transition-colors duration-300 uppercase hover:text-gray-300">BRAND</a>
-                    <a href="#" className="navbar-link text-white text-base font-normal mr-8 transition-colors duration-300 uppercase hover:text-gray-300">Work</a>
-                    <a href="#" className="navbar-link text-white text-base font-normal mr-8 transition-colors duration-300 uppercase hover:text-gray-300">About</a>
-                    <a href="#" className="navbar-link text-white text-base font-normal transition-colors duration-300 uppercase hover:text-gray-300">Contact</a>
+            <nav 
+                className="fixed top-0 left-0 w-full flex items-center z-10 font-['Inter'] h-[70px] backdrop-blur-sm bg-black/80 border-b border-white/20 shadow-lg"
+                style={{ boxShadow: '0 9px 20px -10px #000000ad' }}
+            >
+                <div className="md:flex hidden items-center ml-[70px] space-x-[50px]">
+                    <a href="/" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">HOME</a>
+                    <a href="[https://karliskah.com/#Projects](https://karliskah.com/#Projects)" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">PROJECTS</a>
+                    <a href="[https://www.karliskah.com/play](https://www.karliskah.com/play)" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">MISC</a>
+                    <a href="/about" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">ABOUT</a>
                 </div>
                 {/* Hamburger menu, visible on mobile only */}
-                <a href="#" className="text-white text-base font-bold uppercase md:hidden block">BRAND</a>
                 <div 
-                    className="hamburger-icon text-3xl leading-none transition-transform duration-300 md:hidden block cursor-pointer"
+                    className="hamburger-icon text-3xl leading-none transition-transform duration-300 md:hidden block cursor-pointer ml-auto mr-6"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                     {isMobileMenuOpen ? '×' : '☰'}
@@ -38,9 +40,10 @@ const Navbar: React.FC = () => {
                 >
                     ×
                 </div>
-                <a href="#" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">Work</a>
-                <a href="#" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">About</a>
-                <a href="#" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">Contact</a>
+                <a href="/" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">HOME</a>
+                <a href="[https://karliskah.com/#Projects](https://karliskah.com/#Projects)" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">PROJECTS</a>
+                <a href="[https://www.karliskah.com/play](https://www.karliskah.com/play)" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">MISC</a>
+                <a href="/about" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">ABOUT</a>
             </div>
         </>
     );

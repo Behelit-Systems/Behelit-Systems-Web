@@ -30,7 +30,7 @@ const HeroSection: React.FC = () => {
 
         const cursorDot = document.querySelector('.cursor-dot') as HTMLDivElement | null;
         cursorDotRef.current = cursorDot;
-        const interactiveElements = document.querySelectorAll('.navbar-link, .hero-word, .hamburger-icon');
+        const interactiveElements = document.querySelectorAll('.menu-link, .hero-word, .hamburger-icon');
 
         // Handles cursor position and hover state on desktop only
         const handleMouseMove = (e: MouseEvent) => {
@@ -80,34 +80,36 @@ const HeroSection: React.FC = () => {
                 <div className="cursor-dot home"></div>
             </div>
 
-            {/* Hero section with interactive text */}
-            <div className="flex flex-col justify-center items-center w-full h-full p-4">
-                <h1 className="hero-text-wrapper font-['Helvetica'] font-bold leading-tight text-center flex flex-row flex-wrap justify-center">
-                    {originalWords.map((word, index) => (
-                        <span 
-                            className={`hero-word relative text-[clamp(3rem,8vw,6rem)] mx-3 my-1 cursor-pointer 
-                                        ${!isMobile ? 'group' : ''}`}
-                            key={index} 
-                            onClick={() => handleWordClick(index)}
-                        >
+            <main className="flex flex-col items-center justify-center min-h-screen pt-[70px] px-4">
+                {/* Hero section with interactive text */}
+                <div className="flex flex-col justify-center items-center w-full">
+                    <h1 className="hero-text-wrapper font-['Helvetica'] font-bold leading-tight text-center flex flex-row flex-wrap justify-center">
+                        {originalWords.map((word, index) => (
                             <span 
-                                className={`original transition-opacity duration-300 text-white whitespace-nowrap 
-                                            ${!isMobile ? 'group-hover:opacity-0' : ''} 
-                                            ${tappedWordIndex === index ? 'opacity-0' : 'opacity-100'}`}
+                                className={`hero-word relative text-[clamp(3rem,8vw,6rem)] mx-3 my-1 cursor-pointer 
+                                            ${!isMobile ? 'group' : ''}`}
+                                key={index} 
+                                onClick={() => handleWordClick(index)}
                             >
-                                {word}
+                                <span 
+                                    className={`original transition-opacity duration-300 text-white whitespace-nowrap 
+                                                ${!isMobile ? 'group-hover:opacity-0' : ''} 
+                                                ${tappedWordIndex === index ? 'opacity-0' : 'opacity-100'}`}
+                                >
+                                    {word}
+                                </span>
+                                <span 
+                                    className={`new absolute top-0 left-0 transition-opacity duration-300 text-neutral-300 font-bold whitespace-nowrap 
+                                                ${!isMobile ? 'group-hover:opacity-100' : ''} 
+                                                ${tappedWordIndex === index ? 'opacity-100' : 'opacity-0'}`}
+                                >
+                                    {newWords[index]}
+                                </span>
                             </span>
-                            <span 
-                                className={`new absolute top-0 left-0 transition-opacity duration-300 text-red-500 font-bold whitespace-nowrap 
-                                            ${!isMobile ? 'group-hover:opacity-100' : ''} 
-                                            ${tappedWordIndex === index ? 'opacity-100' : 'opacity-0'}`}
-                            >
-                                {newWords[index]}
-                            </span>
-                        </span>
-                    ))}
-                </h1>
-            </div>
+                        ))}
+                    </h1>
+                </div>
+            </main>
         </>
     );
 };
