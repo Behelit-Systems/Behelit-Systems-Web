@@ -54,8 +54,8 @@ const HeroSection: React.FC = () => {
                     
                     {/* Main Hero Text - Now centered on all screen sizes */}
                     <div className="col-span-12 flex flex-col justify-center text-center">
-                        <h1 className="hero-text-wrapper font-['Helvetica'] font-bold leading-tight text-white
-                                       flex flex-row flex-nowrap justify-center">
+                        <h1 className="hero-text-wrapper font-['Helvetica'] font-bold leading-tight text-white max-w-full
+                                       flex flex-row flex-wrap justify-center">
                             {originalWords.map((word, index) => (
                                 <span 
                                     className={`hero-word relative text-[clamp(1.5rem,5vw,6rem)] mx-1 sm:mx-3 my-1 cursor-pointer 
