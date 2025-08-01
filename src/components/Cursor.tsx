@@ -35,7 +35,7 @@ const Cursor: React.FC = () => {
                 }
 
                 const isHoveringInteractive = Array.from(interactiveElements || []).some(el => el.contains(e.target as Node));
-
+                
                 if (isHoveringInteractive) {
                     cursorDotRef.current?.classList.add('hovered');
                 } else {
