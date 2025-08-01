@@ -16,6 +16,7 @@ html {
 }
 
 body {
+  /* The custom cursor is now handled by a React component, so we remove the default cursor on the body */
   cursor: none;
   font-family: 'Neuemontreal', sans-serif;
   font-weight: 400;

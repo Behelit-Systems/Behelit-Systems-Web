@@ -13,13 +13,13 @@ const Navbar: React.FC = () => {
     return (
         <>
             <nav 
-                className="fixed top-0 left-0 w-full flex items-center z-10 font-['Inter'] h-[70px] backdrop-blur-sm bg-black/80 border-b border-white/20 shadow-lg"
+                className="fixed top-0 left-0 w-full flex items-center z-10 font-sans h-[70px] backdrop-blur-sm bg-black/80 border-b border-white/20 shadow-lg"
                 style={{ boxShadow: '0 9px 20px -10px #000000ad' }}
             >
                 <div className="md:flex hidden items-center ml-[70px] space-x-[50px]">
                     <a href="/" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">HOME</a>
-                    <a href="[https://karliskah.com/#Projects](https://karliskah.com/#Projects)" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">PROJECTS</a>
-                    <a href="[https://www.karliskah.com/play](https://www.karliskah.com/play)" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">MISC</a>
+                    <a href="/projects" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">PROJECTS</a>
+                    <a href="/misc" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">MISC</a>
                     <a href="/about" className="menu-link text-white text-base font-normal uppercase transition-all duration-300 hover:text-neutral-500">ABOUT</a>
                 </div>
                 {/* Hamburger menu, visible on mobile only */}
@@ -41,8 +41,8 @@ const Navbar: React.FC = () => {
                     ×
                 </div>
                 <a href="/" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">HOME</a>
-                <a href="[https://karliskah.com/#Projects](https://karliskah.com/#Projects)" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">PROJECTS</a>
-                <a href="[https://www.karliskah.com/play](https://www.karliskah.com/play)" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">MISC</a>
+                <a href="/projects" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">PROJECTS</a>
+                <a href="/misc" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">MISC</a>
                 <a href="/about" className="text-[clamp(3rem,10vw,5rem)] my-4 text-white decoration-none uppercase font-normal">ABOUT</a>
             </div>
         </>

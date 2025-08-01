@@ -2,22 +2,19 @@
 //  File: src/components/HeroSection.tsx
 //
 //  This is a React component containing the interactive hero text,
-//  custom cursor logic, all styled with Tailwind.
+//  styled with Tailwind. The cursor logic has been moved to a separate component.
 // =========================================================
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar.tsx';
 
 const HeroSection: React.FC = () => {
-    // Refs for the custom cursor element
-    const cursorDotRef = useRef<HTMLDivElement | null>(null);
     // State to track the index of the word that is currently "tapped" on mobile
     const [tappedWordIndex, setTappedWordIndex] = useState<number | null>(null);
-    // State to track if the device is mobile or not
+    // State to track if the device is mobile or not, initialized to false for server render
     const [isMobile, setIsMobile] = useState<boolean>(false);
 
-    // Effect hook to determine if the device is mobile and to handle custom cursor's position and hover state
+    // This effect runs only on the client side to correctly determine the device type
     useEffect(() => {
-        // This code only runs on the client, so `window` is always defined here.
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
@@ -28,45 +25,18 @@ const HeroSection: React.FC = () => {
         // Add event listener for window resize
         window.addEventListener('resize', handleResize);
 
-        const cursorDot = document.querySelector('.cursor-dot') as HTMLDivElement | null;
-        cursorDotRef.current = cursorDot;
-        const interactiveElements = document.querySelectorAll('.menu-link, .hero-word, .hamburger-icon');
-
-        // Handles cursor position and hover state on desktop only
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!isMobile) {
-                if (cursorDotRef.current) {
-                    // Set the position of the cursor dot directly to the mouse coordinates.
-                    // The CSS `transform: translate(-50%, -50%)` centers the dot.
-                    cursorDotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-                }
-
-                // Check if the mouse is hovering over an interactive element
-                const isHoveringInteractive = Array.from(interactiveElements || []).some(el => el.contains(e.target as Node));
-                
-                if (isHoveringInteractive) {
-                    cursorDotRef.current?.classList.add('hovered');
-                } else {
-                    cursorDotRef.current?.classList.remove('hovered');
-                }
-            }
-        };
-
-        // Add event listener for mouse movement
-        document.addEventListener('mousemove', handleMouseMove);
-
-        // Cleanup function to remove event listeners
+        // Cleanup function to remove the event listener
         return () => {
             window.removeEventListener('resize', handleResize);
-            document.removeEventListener('mousemove', handleMouseMove);
         };
-    }, [isMobile]); // Re-run effect when isMobile state changes
+    }, []); // Empty dependency array ensures this runs once on mount
 
     const originalWords: string[] = ["SECURING", "WHAT", "OTHERS", "MISS"];
     const newWords: string[] = ["HIDDEN", "IN", "PLAIN", "SIGHT"];
 
     // Handle click events for text on mobile
     const handleWordClick = (index: number) => {
+        // We only want to handle this logic on mobile, where the cursor is not visible
         if (isMobile) {
             setTappedWordIndex(index === tappedWordIndex ? null : index);
         }
@@ -75,11 +45,6 @@ const HeroSection: React.FC = () => {
     return (
         <>
             <Navbar />
-            {/* Custom cursor element, visible on desktop only */}
-            <div className="cursor md:block hidden">
-                <div className="cursor-dot home"></div>
-            </div>
-
             <main className="flex flex-col items-center justify-center min-h-screen pt-[70px] px-4">
                 {/* Hero section with interactive text */}
                 <div className="flex flex-col justify-center items-center w-full">
