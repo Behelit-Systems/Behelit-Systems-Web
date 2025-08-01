@@ -15,8 +15,15 @@ module.exports = {
     extend: {
       // Define a custom font family to be used throughout the project
       fontFamily: {
-        sans: ['"Inter"', 'sans-serif'],
+        'sans': ['Inter', 'sans-serif'],
+        'display': ['Unbounded', 'sans-serif'],
       },
+      colors: {
+        'bg-brand-dark': '#0A0A0A',
+        'bg-brand-light': '#F5F5F5',
+        'bg-brand-accent': '#F000B8',
+        'bg-brand-grey': '#888888',
+      }
     },
   },
   plugins: [

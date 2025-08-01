@@ -2,17 +2,17 @@
 // =========================================================
 //  File: src/pages/404.astro
 //
-//  This is a placeholder for the 404 "Page Not Found" page.
-//  It uses the main Layout for consistent styling.
+//  This is the 404 Not Found page.
 // =========================================================
 -->
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="404 - Page Not Found">
-    <main class="flex flex-col items-center justify-center min-h-screen pt-[70px] px-4">
-        <h1 class="text-[12rem] font-bold text-center text-red-500 animate-pulse">404</h1>
-        <p class="text-3xl mt-4 text-center">Looks like you're lost in space.</p>
-        <a href="/" class="mt-8 text-neutral-300 hover:text-white transition-colors duration-300 uppercase tracking-widest border border-neutral-300 px-6 py-3 rounded-full hover:bg-neutral-300 hover:text-black">Go Home</a>
-    </main>
+
+<Layout title="404 Not Found">
+    <div className="flex flex-col items-center justify-center h-screen text-center p-8">
+        <h1 className="text-8xl font-bold text-red-500 mb-4">404</h1>
+        <p className="text-2xl text-gray-300">Page Not Found</p>
+        <a href="/" className="mt-8 text-xl text-pink-500 hover:underline">Go to Home Page</a>
+    </div>
 </Layout>

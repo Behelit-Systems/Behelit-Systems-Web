@@ -1,65 +1,60 @@
-// =========================================================
-//  File: src/components/Cursor.tsx
-//
-//  This is a new React component for the custom cursor.
-//  It handles the cursor's position and hover effects.
-// =========================================================
-import React, { useEffect, useRef, useState } from 'react';
+// src/components/Cursor.tsx
+import React, { useState, useEffect } from 'react';
 
-const Cursor: React.FC = () => {
-    // Refs for the custom cursor element
-    const cursorDotRef = useRef<HTMLDivElement | null>(null);
-    // State to track if the device is mobile or not
-    const [isMobile, setIsMobile] = useState<boolean>(false);
+export default function Cursor() {
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768);
-        };
+        setIsClient(true);
+    }, []);
 
-        // Set initial state
-        handleResize();
+    if (!isClient) {
+        return null;
+    }
 
-        // Add event listener for window resize
-        window.addEventListener('resize', handleResize);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [cursorPosition, setCursorPosition] = useState({ x: -100, y: -100 });
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const [isHovered, setIsHovered] = useState(false);
 
-        const cursorDot = document.querySelector('.cursor-dot') as HTMLDivElement | null;
-        cursorDotRef.current = cursorDot;
-        // Select all elements that should trigger the cursor hover effect
-        const interactiveElements = document.querySelectorAll('.menu-link, .hero-word, .hamburger-icon, a, button');
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (window.matchMedia("(pointer: fine)").matches) {
+            const handleMouseMove = (e: MouseEvent) => {
+                setCursorPosition({ x: e.clientX, y: e.clientY });
+            };
 
-        const handleMouseMove = (e: MouseEvent) => {
-            if (!isMobile) {
-                if (cursorDotRef.current) {
-                    cursorDotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-                }
+            const handleMouseEnter = () => setIsHovered(true);
+            const handleMouseLeave = () => setIsHovered(false);
 
-                const isHoveringInteractive = Array.from(interactiveElements || []).some(el => el.contains(e.target as Node));
-                
-                if (isHoveringInteractive) {
-                    cursorDotRef.current?.classList.add('hovered');
-                } else {
-                    cursorDotRef.current?.classList.remove('hovered');
-                }
-            }
-        };
+            const interactiveElements = document.querySelectorAll('a, button');
 
-        // Add event listener for mouse movement on desktop
-        document.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mousemove', handleMouseMove);
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', handleMouseEnter);
+                element.addEventListener('mouseleave', handleMouseLeave);
+            });
 
-        // Cleanup function to remove event listeners
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            document.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [isMobile]);
+            return () => {
+                window.removeEventListener('mousemove', handleMouseMove);
+                interactiveElements.forEach(element => {
+                    element.removeEventListener('mouseenter', handleMouseEnter);
+                    element.removeEventListener('mouseleave', handleMouseLeave);
+                });
+            };
+        }
+    }, []);
+
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+        return null;
+    }
 
     return (
-        // Custom cursor element, visible on desktop only
-        <div className="cursor md:block hidden">
-            <div className="cursor-dot home"></div>
-        </div>
+        <div
+            className={`custom-cursor ${isHovered ? 'hovered' : ''}`}
+            style={{
+                transform: `translate(calc(-50% + ${cursorPosition.x}px), calc(-50% + ${cursorPosition.y}px))`,
+            }}
+        ></div>
     );
-};
-
-export default Cursor;
+}

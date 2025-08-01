@@ -1,25 +1,38 @@
 @import "tailwindcss";
 
-/* A simple CSS reset to ensure consistent box-sizing across browsers */
-* {
-  box-sizing: border-box;
+@layer base {
+    /* Set scroll behavior and base styles for the page */
+    html {
+        @apply scroll-smooth;
+    }
+
+    /* Base body styles */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide custom cursor on touch devices and set default cursor */
+    @media (max-width: 768px) {
+        body {
+            cursor: default;
+        }
+    }
 }
 
-:root {
-  --white: white;
-  --black: black;
+/* Section fade-in animation on scroll */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-html {
-  -webkit-text-size-adjust: 100%;
-  font-family: sans-serif;
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-body {
-  /* The custom cursor is now handled by a React component, so we remove the default cursor on the body */
-  cursor: none;
-  font-family: 'Neuemontreal', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 20px;
+/* Styling for the service list dividers */
+.service-item:not(:last-child) {
+    border-bottom: 1px solid #333;
 }
