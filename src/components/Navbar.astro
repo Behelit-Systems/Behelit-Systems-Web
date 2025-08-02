@@ -1,14 +1,52 @@
 ---
-// src/components/Navbar.astro
+const navLinks = [
+    { href: "/", text: "Home" },
+    { href: "/about", text: "About" },
+    { href: "/services", text: "Services" },
+    { href: "/community", text: "Community" },
+];
 ---
-<header class="fixed top-0 left-0 w-full p-4 sm:p-6 z-50">
-    <nav class="flex justify-between items-center max-w-7xl mx-auto">
-        <a href="#home" class="font-display text-lg font-bold hover:text-brand-accent transition-colors">BEHELIT SYSTEMS</a>
-        <ul class="hidden md:flex items-center space-x-6 font-medium">
-            <li><a href="#about" class="hover:text-brand-accent transition-colors">About</a></li>
-            <li><a href="#services" class="hover:text-brand-accent transition-colors">Services</a></li>
-            <li><a href="#community" class="hover:text-brand-accent transition-colors">Community</a></li>
-            <li><a href="#contact" class="hover:text-brand-accent transition-colors">Contact</a></li>
-        </ul>
-    </nav>
+<header 
+    class="fixed top-0 left-0 w-full bg-black z-50"
+    transition:persist
+>
+    <div class="container mx-auto px-6">
+        <nav class="flex justify-between items-center py-4 border-b border-gray-800">
+            <a href="/" class="text-lg font-bold tracking-widest uppercase hover:text-gray-400">
+                Behelit Systems
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                {navLinks.map(link => (
+                    <a href={link.href} class="text-sm font-medium uppercase tracking-wider hover:text-gray-400 transition-colors">
+                        {link.text}
+                    </a>
+                ))}
+            </div>
+            <a href="/contact" class="hidden md:inline-block text-sm font-medium px-5 py-2 border border-gray-700 rounded-full hover:bg-white hover:text-black transition-colors">
+                Contact
+            </a>
+            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+            </button>
+        </nav>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-black/95 border-b border-gray-800">
+        <div class="px-6 pt-2 pb-4 flex flex-col items-center space-y-4">
+            {navLinks.map(link => (
+                <a href={link.href} class="block text-base font-medium uppercase tracking-wider hover:text-gray-400 transition-colors py-2">{link.text}</a>
+            ))}
+            <a href="/contact" class="block text-base font-medium px-6 py-2 border border-gray-700 rounded-full mt-4 hover:bg-white hover:text-black transition-colors">Contact</a>
+        </div>
+    </div>
 </header>
+<script>
+    document.addEventListener('astro:page-load', () => {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    });
+</script>

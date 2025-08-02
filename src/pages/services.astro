@@ -1,0 +1,78 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Content from '@components/Content.astro';
+
+const services = [
+    {
+        title: "Full-Spectrum Hardware Security",
+        description: "In-depth analysis of embedded systems, firmware reverse engineering, wireless protocol exploitation, and supply chain security.",
+        // Placeholder image URL - replace with actual images
+        image: "https://placehold.co/600x400/0A0A0A/EAEAEA?text=Hardware"
+    },
+    {
+        title: "Aggressive Physical Penetration Testing",
+        description: "Simulating real-world intrusion attempts to test physical access controls, facility security, and environmental defenses.",
+        image: "https://placehold.co/600x400/0A0A0A/EAEAEA?text=Physical"
+    },
+    {
+        title: "Advanced Social Engineering",
+        description: "Targeted phishing, vishing, and smishing campaigns combined with human vulnerability assessments and scambaiting operations.",
+        image: "https://placehold.co/600x400/0A0A0A/EAEAEA?text=Social"
+    },
+    {
+        title: "Robust Blue Team Defense",
+        description: "Building and hardening your defenses via SIEM optimization, EDR implementation, proactive threat hunting, and incident response.",
+        image: "https://placehold.co/600x400/0A0A0A/EAEAEA?text=Defense"
+    },
+];
+---
+
+<Layout 
+    title="Services"
+    description="Explore our specialized security services, including full-spectrum hardware security, aggressive physical penetration testing, advanced social engineering, and robust blue team defense.">
+
+    <div class="pt-32 pb-16 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase">Our Services</h1>
+        <p class="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">A suite of specialized services designed to provide unyielding resilience.</p>
+    </div>
+
+    <Content>
+        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+            {services.map((service, index) => (
+                <div class="service-card relative overflow-hidden p-8 border border-gray-800 rounded-lg group">
+                    <span class="text-gray-600 font-mono text-sm">0{index + 1}</span>
+                    <h3 class="text-2xl font-bold my-4 text-gray-200">{service.title}</h3>
+                    <p class="text-gray-500 leading-relaxed">{service.description}</p>
+                    
+                    <!-- Animated image that reveals on hover -->
+                    <img 
+                        src={service.image} 
+                        alt={service.title} 
+                        class="service-image absolute top-0 left-1/2 w-48 h-auto rounded-md shadow-lg transition-all duration-500 ease-out"
+                        onerror="this.onerror=null;this.src='https://placehold.co/600x400/0A0A0A/EAEAEA?text=Image+Error';"
+                    />
+                </div>
+            ))}
+        </div>
+        <div class="text-center mt-20">
+            <a href="/contact" class="inline-block px-10 py-4 bg-white text-black font-bold rounded-full hover:bg-gray-400 transition-colors text-lg">
+                Request a Consultation
+            </a>
+        </div>
+    </Content>
+</Layout>
+
+<style>
+    .service-card .service-image {
+        /* Start position: hidden below and faded out */
+        transform: translate(-50%, 100%);
+        opacity: 0;
+        pointer-events: none; /* Make sure it doesn't block mouse events */
+    }
+
+    .service-card:hover .service-image {
+        /* End position: centered and visible */
+        transform: translate(-50%, 50%);
+        opacity: 1;
+    }
+</style>

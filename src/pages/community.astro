@@ -1,0 +1,65 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Content from '@components/Content.astro';
+
+const events = [
+    { title: "Workshop: Intro to Firmware Reverse Engineering", date: "Q4 2025", type: "Workshop" },
+    { title: "CTF: The LOLCOW Challenge", date: "Q1 2026", type: "CTF" },
+    { title: "Meetup: Hardware Hacking Show and Tell", date: "Monthly", type: "Meetup" },
+];
+
+const articles = [
+    { title: "Repurposing E-Waste for Fun and Profit (Legally)", author: "cLc Community", link: "#" },
+    { title: "A Guide to Responsible Disclosure", author: "Gabe C.", link: "#" },
+    { title: "Analyzing Side-Channel Attacks on Consumer Devices", author: "cLc Research Wing", link: "#" },
+]
+---
+
+<Layout 
+    title="Community"
+    description="Join the Cult of the LOLCOW (cLc), a free, open-source hardware hacking community by Behelit Systems. Fostering research, talent, and responsible e-waste repurposing.">
+
+    <div class="pt-40 pb-20 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase">Cult of the LOLCOW (cLc)</h1>
+        <p class="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">A free, open-source hardware hacking community fostering collaborative research and cultivating next-generation talent.</p>
+    </div>
+
+    <Content>
+        <div class="max-w-5xl mx-auto space-y-20">
+            <!-- Events Section -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 uppercase tracking-wider">Upcoming Events</h2>
+                <div class="border-t border-gray-800">
+                    {events.map(event => (
+                        <div class="p-4 border-b border-gray-800 flex justify-between items-center transition-colors hover:bg-gray-900/50">
+                            <div>
+                                <h3 class="font-semibold text-xl text-gray-200">{event.title}</h3>
+                                <span class={`inline-block text-xs font-bold py-1 px-2 rounded-full mt-2 ${
+                                    event.type === 'Workshop' ? 'bg-blue-900/50 text-blue-300' : 
+                                    event.type === 'CTF' ? 'bg-red-900/50 text-red-300' : 
+                                    'bg-green-900/50 text-green-300'
+                                }`}>{event.type}</span>
+                            </div>
+                            <div class="text-sm text-gray-500 font-medium">{event.date}</div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Research Section -->
+            <div>
+                <h2 class="text-3xl font-bold mb-6 uppercase tracking-wider">Research & Articles</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                     {articles.map(article => (
+                        <a href={article.link} class="block p-6 border border-gray-800 rounded-lg hover:border-gray-700 hover:-translate-y-1 transition-transform">
+                            <h3 class="font-semibold text-lg">{article.title}</h3>
+                            <p class="text-sm text-gray-500 mt-2">by {article.author}</p>
+                        </a>
+                    ))}
+                </div>
+            </div>
+            
+        </div>
+    </Content>
+</Layout>
+

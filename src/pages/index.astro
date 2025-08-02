@@ -1,39 +1,9 @@
 ---
-// src/pages/index.astro
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import About from '../components/About.astro';
-import Services from '../components/Services.astro';
-import Community from '../components/Community.astro';
-import Contact from '../components/Contact.astro';
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/Hero.astro';
 ---
-
-<Layout title="Behelit Systems | Securing What Others Miss">
-	<main id="main-content" class="px-4 sm:px-6">
-        <Hero />
-        <About />
-        <Services />
-        <Community />
-        <Contact />
-    </main>
-    <script>
-        // This script handles the fade-in animation for sections on scroll.
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.fade-in-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                rootMargin: '0px',
-                threshold: 0.15
-            });
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-        });
-    </script>
+<Layout 
+    title="Home" 
+    description="Behelit Systems: Premier firm for full-spectrum hardware security, physical penetration testing, and advanced social engineering. We secure what others miss.">
+    <Hero />
 </Layout>

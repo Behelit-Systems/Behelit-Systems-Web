@@ -1,38 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
 @import "tailwindcss";
+@plugin '@tailwindcss/typography';
 
-@layer base {
-    /* Set scroll behavior and base styles for the page */
-    html {
-        @apply scroll-smooth;
-    }
-
-    /* Base body styles */
-    body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
-
-    /* Hide custom cursor on touch devices and set default cursor */
-    @media (max-width: 768px) {
-        body {
-            cursor: default;
-        }
-    }
+@theme inline {
+	--font-sans: var(--font-geist);
 }
 
-/* Section fade-in animation on scroll */
-.fade-in-section {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+/* Global styles for the dark, modern theme. */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0A0A0A; /* Near-black background */
+  color: #EAEAEA; /* Off-white text for readability */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden; /* Prevent unwanted horizontal scrolling */
 }
 
-.fade-in-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Styling for the service list dividers */
-.service-item:not(:last-child) {
-    border-bottom: 1px solid #333;
+/* Custom text selection style to match the dark theme */
+::selection {
+  background-color: #EAEAEA;
+  color: #0A0A0A;
 }

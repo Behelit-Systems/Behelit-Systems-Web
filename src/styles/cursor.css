@@ -1,34 +1,64 @@
-/* src/styles/cursor.css */
-body {
-    cursor: none; /* Hide the default cursor on desktop */
+/*
+// =========================================================
+//  File: src/styles/cursor.css
+//
+//  This file contains all the custom CSS for the cursor.
+// =========================================================
+*/
+
+/* The main container for the cursor effect. */
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 100000;
+  opacity: 0;
+  mix-blend-mode: exclusion;
+  transition: opacity .2s cubic-bezier(.39, .575, .565, 1);
+  cursor: none;
 }
 
-/* Custom cursor styles */
-.custom-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 25px;
-    height: 25px;
-    border: 2px solid #F5F5F5;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 10000;
-    mix-blend-mode: exclusion;
-    transform: translate(-50%, -50%);
-    transition: transform 0.2s ease-out, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+/* Fades the cursor in when the mouse is over the page. */
+body:hover .cursor {
+  opacity: 1;
 }
 
-.custom-cursor.hovered {
-    width: 60px;
-    height: 60px;
-    background-color: rgba(240, 0, 184, 0.5);
-    border: none;
+/* The default state of the cursor dot. */
+.cursor-dot {
+  position: absolute;
+  background-color: #1e1d1d;
+  border: 1px solid transparent;
+  border-radius: 100vw;
+  width: 15px;
+  height: 15px;
+  transition: width 0.2s cubic-bezier(0.39, 0.575, 0.565, 1),
+              height 0.2s cubic-bezier(0.39, 0.575, 0.565, 1),
+              background-color 0.2s cubic-bezier(0.39, 0.575, 0.565, 1),
+              border 0.2s cubic-bezier(0.39, 0.575, 0.565, 1);
+  transform: translate(-50%, -50%); /* Center the dot on the cursor */
 }
 
-/* Hide custom cursor on mobile */
-@media (max-width: 768px) {
-    .custom-cursor {
-        display: none;
-    }
+/* A special style for the cursor when on the homepage. */
+.cursor-dot.home {
+  color: #1e1d1d;
+  mix-blend-mode: normal;
+  background-color: #ffffff47; /* semi-transparent white */
+  border-color: #fff;
+}
+
+/* The state when hovering over an interactive element. */
+.cursor-dot.hovered {
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+}
+
+/* Helper class from the reference, can be removed if not used. */
+.html-embed-2 {
+  color: #1e1d1d;
+  cursor: none;
 }

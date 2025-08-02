@@ -1,0 +1,43 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Content from '@components/Content.astro';
+---
+
+<Layout 
+    title="About Us"
+    description="Learn about Behelit Systems, our mission, vision, and the global intelligence network that powers our advanced security services.">
+    
+    <div class="pt-40 pb-20 text-center">
+        <h1 class="text-4xl md:text-6xl font-bold tracking-tighter uppercase">About Us</h1>
+        <p class="mt-4 text-lg text-gray-500 max-w-3xl mx-auto">Engineering unyielding resilience from silicon to people.</p>
+    </div>
+
+    <Content>
+        <div class="max-w-4xl mx-auto space-y-12">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <h2 class="md:col-span-2 text-2xl font-bold text-gray-400 uppercase tracking-wider">Our Mission</h2>
+                <p class="md:col-span-3 text-gray-300 leading-relaxed text-lg">
+                    To revolutionize security posture by meticulously uncovering and neutralizing critical vulnerabilities in hardware and the human element, providing unparalleled, actionable insights, and fostering a collaborative, resilient cybersecurity ecosystem.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <h2 class="md:col-span-2 text-2xl font-bold text-gray-400 uppercase tracking-wider">Our Vision</h2>
+                <p class="md:col-span-3 text-gray-300 leading-relaxed text-lg">
+                    To be the leading and most trusted authority in full-spectrum hardware and human factor security in Southeast Asia and beyond, setting new standards for adversarial simulation and defensive hardening.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <h2 class="md:col-span-2 text-2xl font-bold text-gray-400 uppercase tracking-wider">Global Intel</h2>
+                <p class="md:col-span-3 text-gray-300 leading-relaxed text-lg">
+                    Our foundation is unparalleled global collaboration. We actively forge partnerships with elite researchers from the world's most prestigious security communities, including DEF CON, Black Hat, and Hardwear.io.
+                </p>
+            </div>
+             <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <h2 class="md:col-span-2 text-2xl font-bold text-gray-400 uppercase tracking-wider">The Founder</h2>
+                <p class="md:col-span-3 text-gray-300 leading-relaxed text-lg">
+                    Behelit Systems was launched in July 2025 by Chew Zhan Hong (Gabe), a security consultant with deep expertise in full-spectrum hardware security, physical penetration testing, and advanced social engineering.
+                </p>
+            </div>
+        </div>
+    </Content>
+</Layout>

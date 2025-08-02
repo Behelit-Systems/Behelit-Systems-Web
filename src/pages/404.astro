@@ -1,18 +1,17 @@
-<!--
-// =========================================================
-//  File: src/pages/404.astro
-//
-//  This is the 404 Not Found page.
-// =========================================================
--->
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '@layouts/Layout.astro';
 ---
-
-<Layout title="404 Not Found">
-    <div className="flex flex-col items-center justify-center h-screen text-center p-8">
-        <h1 className="text-8xl font-bold text-red-500 mb-4">404</h1>
-        <p className="text-2xl text-gray-300">Page Not Found</p>
-        <a href="/" className="mt-8 text-xl text-pink-500 hover:underline">Go to Home Page</a>
+<Layout title="404: Not Found" description="The page you're looking for could not be found.">
+    <div class="min-h-screen flex items-center justify-center text-center px-4">
+        <div>
+            <h1 class="text-9xl md:text-[12rem] font-bold tracking-tighter text-gray-800/50">404</h1>
+            <p class="text-xl md:text-2xl mt-4 font-medium uppercase tracking-widest">Resource Not Found</p>
+            <p class="text-gray-500 mt-2">The page you requested could not be located.</p>
+            <div class="mt-10">
+                <a href="/" class="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-400 transition-colors">
+                    Return Home
+                </a>
+            </div>
+        </div>
     </div>
 </Layout>
