@@ -3,7 +3,7 @@ const navLinks = [
     { href: "/about", text: "About" },
     { href: "/services", text: "Services" },
     { href: "/community", text: "Community" },
-    { href: "mailto:hello@behelitsystems.com", text: "Contact" },
+    { href: "/", text: "Contact" },
 ];
 ---
 <!-- The header and the mobile menu are now separate elements at the root 
@@ -68,29 +68,48 @@ const navLinks = [
 </style>
 
 <script>
-    document.addEventListener('astro:page-load', () => {
+    // This function sets up all the event listeners for the mobile menu.
+    function initMobileMenu() {
         const openButton = document.getElementById('mobile-menu-open-button');
         const closeButton = document.getElementById('mobile-menu-close-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
+        // If any element is missing, we can't proceed.
+        if (!openButton || !closeButton || !mobileMenu) {
+            return;
+        }
+
         const openMenu = () => {
-            if (mobileMenu) mobileMenu.classList.add('is-open');
+            mobileMenu.classList.add('is-open');
             document.body.style.overflow = 'hidden';
         };
 
         const closeMenu = () => {
-            if (mobileMenu) mobileMenu.classList.remove('is-open');
+            mobileMenu.classList.remove('is-open');
             document.body.style.overflow = '';
         };
 
-        if (openButton && closeButton && mobileMenu) {
-            openButton.addEventListener('click', openMenu);
-            closeButton.addEventListener('click', closeMenu);
-
-            const links = mobileMenu.querySelectorAll('.mobile-menu-link');
-            links.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
+        // Prevent adding duplicate event listeners on page transitions
+        if (openButton.dataset.listenerAttached) {
+            return;
         }
-    });
+
+        openButton.addEventListener('click', openMenu);
+        closeButton.addEventListener('click', closeMenu);
+
+        const links = mobileMenu.querySelectorAll('.mobile-menu-link');
+        links.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+
+        // Mark the button so we know listeners are attached.
+        openButton.dataset.listenerAttached = 'true';
+    }
+
+    // Run the setup function on the initial page load.
+    document.addEventListener('DOMContentLoaded', initMobileMenu);
+    
+    // Run the setup function on subsequent page loads when using View Transitions.
+    document.addEventListener('astro:page-load', initMobileMenu);
 </script>
+
