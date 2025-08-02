@@ -10,18 +10,30 @@ const events = [
     title="Community"
     description="Join the Cult of the LOLCOW (cLc), a free, open-source hardware hacking community by Behelit Systems.">
     <Content>
-        <div class="max-w-5xl mx-auto pt-20">
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-4">Cult of the LOLCOW (cLc)</h1>
-            <p class="text-lg text-gray-600 max-w-2xl mb-12">A free, open-source hardware hacking community fostering collaborative research, cultivating next-generation talent, and championing responsible e-waste repurposing.</p>
+        <div class="max-w-5xl mx-auto pt-28 md:pt-40">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20 md:mb-28">
+                <!-- Text Content -->
+                <div>
+                    <h2 class="text-sm uppercase text-gray-500 font-bold mb-4">Community /</h2>
+                    <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-4">Cult of the LOLCOW (cLc)</h1>
+                    <p class="text-lg text-gray-600">A free, open-source hardware hacking community fostering collaborative research, cultivating next-generation talent, and championing responsible e-waste repurposing.</p>
+                </div>
+                <!-- Image Placeholder -->
+                <div class="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-400">Image Placeholder</span>
+                </div>
+            </div>
             
-            <h2 class="text-sm uppercase text-gray-500 mb-4 mt-16">Upcoming Events</h2>
-            <div class="border-t border-gray-300">
-                {events.map((event) => (
-                    <div class="border-b border-gray-300 py-4 flex justify-between items-center">
-                        <h3 class="text-xl font-bold">{event.title}</h3>
-                        <p class="text-sm text-gray-500">{event.date}</p>
-                    </div>
-                ))}
+            <div>
+                <h2 class="text-sm uppercase text-gray-500 font-bold mb-4">Upcoming Events /</h2>
+                <div class="border-t border-gray-300">
+                    {events.map((event) => (
+                        <div class="border-b border-gray-300 py-4 flex justify-between items-center">
+                            <h3 class="text-xl font-bold">{event.title}</h3>
+                            <p class="text-sm text-gray-500">{event.date}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     </Content>
