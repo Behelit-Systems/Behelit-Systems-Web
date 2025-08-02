@@ -98,14 +98,13 @@ function initHeroTextSwap() {
 
     if (isMobile) {
         // On mobile, swap all words on a single tap of the entire hero area.
-        let isSwapped = false;
         const mobileTapHandler = () => {
-            isSwapped = !isSwapped;
+            // Check the state of the first word to determine if we should swap or un-swap.
+            const currentlySwapped = wordFaders[0].classList.contains('is-swapped');
             wordFaders.forEach(fader => {
-                fader.classList.toggle('is-swapped', isSwapped);
+                fader.classList.toggle('is-swapped', !currentlySwapped);
             });
         };
-        // Use 'click' as it works for both tap and mouse, ensuring functionality.
         heroArea.addEventListener('click', mobileTapHandler);
 
         // Cleanup function for Astro's View Transitions
