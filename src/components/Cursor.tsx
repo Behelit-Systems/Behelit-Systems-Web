@@ -7,7 +7,14 @@ const Cursor: React.FC = () => {
     const animationFrameId = useRef<number>();
 
     useEffect(() => {
-        // Move the cursor container to the body to avoid stacking context issues with the scroller.
+        // --- Mobile Device Check ---
+        // If the user is on a mobile device, do not initialize the custom cursor.
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            return; // Exit the effect, disabling the cursor.
+        }
+
+        // Move the cursor container to the body to avoid stacking context issues.
         if (cursorContainerRef.current) {
             document.body.appendChild(cursorContainerRef.current);
         }
@@ -49,6 +56,8 @@ const Cursor: React.FC = () => {
         };
     }, []);
 
+    // The component will still render the div initially, but the useEffect hook will
+    // not run on mobile, so it will remain empty and unattached.
     return (
         <div ref={cursorContainerRef} className="cursor">
             <div ref={cursorDotRef} className="cursor-dot"></div>
@@ -57,4 +66,5 @@ const Cursor: React.FC = () => {
 };
 
 export default Cursor;
+
 

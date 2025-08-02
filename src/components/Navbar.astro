@@ -1,17 +1,19 @@
 ---
 const navLinks = [
+    { href: "/", text: "Home" },
     { href: "/about", text: "About" },
     { href: "/services", text: "Services" },
     { href: "/community", text: "Community" },
-    { href: "/contact", text: "Contact" },
+    { href: "mailto:hello@behelitsystems.com", text: "Contact" },
 ];
 ---
 <header class="fixed top-0 left-0 w-full z-50 p-6 md:p-8" transition:persist>
     <div class="container mx-auto">
         <nav class="flex justify-between items-center">
-            <a href="/" class="text-base font-bold uppercase tracking-widest hover:text-gray-500">
+            <a href="/" class="text-base font-bold uppercase tracking-widest hover:text-gray-500 z-50">
                 Behelit Systems
             </a>
+            <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-8">
                 {navLinks.map(link => (
                     <a href={link.href} class="text-sm font-medium uppercase tracking-wider hover:text-gray-500 transition-colors">
@@ -19,25 +21,50 @@ const navLinks = [
                     </a>
                 ))}
             </div>
-            <button id="mobile-menu-button" class="md:hidden p-2">
-                 <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2 z-50">
+                 <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </nav>
     </div>
-     <div id="mobile-menu" class="hidden md:hidden bg-[#F3F3F3] mt-4">
-        <div class="px-6 pt-2 pb-4 flex flex-col items-start space-y-4">
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-black text-white">
+        <div class="flex flex-col items-center justify-center h-full text-center space-y-8">
             {navLinks.map(link => (
-                <a href={link.href} class="block text-lg font-medium uppercase tracking-wider hover:text-gray-500 transition-colors py-2">{link.text}</a>
+                <a href={link.href} class="mobile-menu-link block text-4xl font-bold uppercase tracking-wider hover:text-gray-500 transition-colors">
+                    {link.text}
+                </a>
             ))}
         </div>
+        <button id="mobile-menu-close-button" class="absolute top-6 right-6 p-2 md:top-8 md:right-8">
+            <svg class="w-8 h-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
     </div>
 </header>
 <script>
     document.addEventListener('astro:page-load', () => {
         const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuCloseButton = document.getElementById('mobile-menu-close-button');
         const mobileMenu = document.getElementById('mobile-menu');
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        const openMenu = () => {
+            if (mobileMenu) mobileMenu.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        };
+
+        const closeMenu = () => {
+            if (mobileMenu) mobileMenu.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        };
+
+        if (mobileMenuButton && mobileMenuCloseButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', openMenu);
+            mobileMenuCloseButton.addEventListener('click', closeMenu);
+
+            const links = mobileMenu.querySelectorAll('.mobile-menu-link');
+            links.forEach(link => {
+                link.addEventListener('click', closeMenu);
+            });
         }
     });
 </script>

@@ -1,24 +1,51 @@
 ---
-// This hero component blends large typography with a subtle compositional layout.
+// This hero component blends a bold, compositional typography layout
+// with smaller, contextual information for a refined aesthetic.
+// It now includes a separate, simplified layout for mobile devices.
 ---
-<section class="relative min-h-screen w-full flex flex-col justify-between p-6 md:p-8">
-    <!-- Top left corner info -->
-    <div class="w-full flex justify-between items-start">
-        <div class="text-xs uppercase max-w-[200px]">
+<section class="relative min-h-screen w-full flex flex-col justify-center p-6 md:p-8">
+
+    <!-- Main Content Area -->
+    <div class="relative w-full max-w-7xl mx-auto" style="height: 70vh;">
+
+        <!-- Centered Typographic Layout Container -->
+        <div class="absolute inset-0 flex items-center justify-center">
+
+            <!-- Mobile Layout: Stacked and Centered (hidden on md and up) -->
+            <div class="md:hidden text-center">
+                <h1 class="text-[16vw] font-bold tracking-tighter leading-none">SECURING</h1>
+                <h1 class="text-[16vw] font-bold tracking-tighter leading-none">WHAT</h1>
+                <h1 class="text-[16vw] font-bold tracking-tighter leading-none">OTHERS</h1>
+                <h1 class="text-[16vw] font-bold tracking-tighter leading-none">MISS.</h1>
+            </div>
+
+            <!-- Desktop Layout: Grid (hidden on mobile) -->
+            <div class="hidden md:grid grid-cols-2 grid-rows-2 w-full max-w-6xl gap-x-4 md:gap-x-8">
+                <h1 class="col-start-1 row-start-1 text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold tracking-tighter leading-none">
+                    SECURING
+                </h1>
+                <h1 class="col-start-2 row-start-1 row-span-2 self-center text-right text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold tracking-tighter leading-none">
+                    WHAT OTHERS
+                </h1>
+                <h1 class="col-start-1 row-start-2 self-end text-[12vw] md:text-[10vw] lg:text-[8vw] font-bold tracking-tighter leading-none">
+                    MISS.
+                </h1>
+            </div>
+        </div>
+
+        <!-- Top-left corner info -->
+        <div class="absolute top-0 left-0 text-xs uppercase max-w-[140px] md:max-w-[200px]">
             <p>Specializing in Hardware, Physical, and Human-Factor Security</p>
         </div>
-    </div>
 
-    <!-- Main heading -->
-    <div class="text-center my-auto">
-        <h1 class="text-[10vw] md:text-[12vw] lg:text-[14vw] leading-none font-bold tracking-tighter">
-            BEHELIT<br>SYSTEMS
-        </h1>
-    </div>
+        <!-- Bottom-left corner info -->
+         <div class="absolute bottom-0 left-0 text-xs uppercase">
+            <p>Based in Kuala Lumpur, Malaysia</p>
+        </div>
 
-    <!-- Bottom row info -->
-    <div class="w-full flex justify-between items-end text-xs uppercase">
-        <p>Based in Subang Jaya, Malaysia</p>
-        <p>Securing What Others Miss™</p>
+        <!-- Bottom-right corner info -->
+        <div class="absolute bottom-0 right-0 text-xs uppercase">
+            <p>© 2025</p>
+        </div>
     </div>
 </section>

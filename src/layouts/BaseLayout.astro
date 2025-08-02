@@ -33,7 +33,18 @@ const { title, description } = Astro.props;
         </main>
         <Footer />
         <style is:global>
-            body, a, button { cursor: none; }
+            /* Hide custom cursor by default on non-mobile devices */
+            body, a, button { 
+                cursor: none; 
+            }
+
+            /* Restore default cursor on mobile devices using a media query
+               that checks for touch capabilities or smaller screen sizes. */
+            @media (pointer: coarse), (max-width: 768px) {
+                body, a, button {
+                    cursor: auto;
+                }
+            }
         </style>
 	</body>
 </html>

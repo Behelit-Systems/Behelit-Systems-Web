@@ -1,0 +1,105 @@
+---
+// This component creates a scrolling marquee banner with a hover-effect button.
+---
+<section class="py-20 md:py-28 overflow-hidden">
+    <!-- The wrapper for the scrolling text. overflow-hidden is crucial. -->
+    <div class="banner-heading-wrapper">
+        <!-- Top row, scrolls from right to left -->
+        <div class="banner-heading-top">
+            <span class="pr-8">Let's Talk / Let's Talk / Let's Talk / Let's Talk /</span>
+            <span class="pr-8">Let's Talk / Let's Talk / Let's Talk / Let's Talk /</span>
+        </div>
+        <!-- Bottom row, scrolls from left to right -->
+        <div class="banner-heading-bottom">
+            <span class="pr-8">Let's Talk / Let's Talk / Let's Talk / Let's Talk /</span>
+            <span class="pr-8">Let's Talk / Let's Talk / Let's Talk / Let's Talk /</span>
+        </div>
+    </div>
+
+    <!-- The interactive contact button, updated with the new style -->
+    <div class="text-center mt-12">
+        <a href="mailto:hello@behelitsystems.com" class="contact-button">
+            <div class="btn-txt-1">Contact</div>
+            <div class="btn-txt-2">Contact</div>
+        </a>
+    </div>
+</section>
+
+<style>
+.banner-heading-wrapper {
+    white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: clamp(2rem, 6vw, 5rem); /* Responsive font size */
+    line-height: 1.1;
+}
+
+.banner-heading-top,
+.banner-heading-bottom {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.banner-heading-top {
+    animation: scroll-left 40s linear infinite;
+}
+
+.banner-heading-bottom {
+    animation: scroll-right 40s linear infinite;
+}
+
+@keyframes scroll-left {
+    from { transform: translateX(0%); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0%); }
+}
+
+/* New button styles based on the reference */
+.contact-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 170px;
+    height: 45px;
+    border: 2px solid #111; /* Black border for the light theme */
+    border-radius: 40px;
+    position: relative;
+    overflow: hidden; /* Crucial for the text slide effect */
+    text-decoration: none;
+    color: #111; /* Black text */
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.875rem; /* 14px */
+}
+
+.btn-txt-1,
+.btn-txt-2 {
+    transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-txt-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateY(100%); /* Start below the button */
+}
+
+.contact-button:hover .btn-txt-1 {
+    transform: translateY(-100%); /* Slide original text up and out */
+}
+
+.contact-button:hover .btn-txt-2 {
+    transform: translateY(0); /* Slide new text in from the bottom */
+}
+</style>
