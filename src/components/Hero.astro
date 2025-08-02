@@ -93,28 +93,43 @@ function initHeroTextSwap() {
     const wordFaders = heroArea.querySelectorAll('.word-fader');
     if (!heroArea || !wordFaders.length) return;
 
-    const isMobile = window.matchMedia("(pointer: coarse)").matches;
+    // A more reliable way to check for touch devices.
+    const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (isMobile) {
-        // On mobile, swap all words on a single click/tap
+        // On mobile, swap all words on a single tap of the entire hero area.
         let isSwapped = false;
-        heroArea.addEventListener('click', () => {
+        const mobileTapHandler = () => {
             isSwapped = !isSwapped;
             wordFaders.forEach(fader => {
                 fader.classList.toggle('is-swapped', isSwapped);
             });
-        });
+        };
+        // Use 'click' as it works for both tap and mouse, ensuring functionality.
+        heroArea.addEventListener('click', mobileTapHandler);
+
+        // Cleanup function for Astro's View Transitions
+        document.addEventListener('astro:before-swap', () => {
+            heroArea.removeEventListener('click', mobileTapHandler);
+        }, { once: true });
+
     } else {
-        // On desktop, swap individual words on hover
+        // On desktop, swap individual words on hover.
         wordFaders.forEach(fader => {
-            fader.addEventListener('mouseenter', () => {
-                fader.classList.add('is-swapped');
-            });
-            fader.addEventListener('mouseleave', () => {
-                fader.classList.remove('is-swapped');
-            });
+            const mouseEnterHandler = () => fader.classList.add('is-swapped');
+            const mouseLeaveHandler = () => fader.classList.remove('is-swapped');
+            
+            fader.addEventListener('mouseenter', mouseEnterHandler);
+            fader.addEventListener('mouseleave', mouseLeaveHandler);
+
+            // Cleanup function for Astro's View Transitions
+            document.addEventListener('astro:before-swap', () => {
+                fader.removeEventListener('mouseenter', mouseEnterHandler);
+                fader.removeEventListener('mouseleave', mouseLeaveHandler);
+            }, { once: true });
         });
     }
 }
+// Run the script on initial load and after every page transition.
 document.addEventListener('astro:page-load', initHeroTextSwap);
 </script>
