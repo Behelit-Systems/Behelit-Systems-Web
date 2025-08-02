@@ -37,9 +37,7 @@ const { title, description } = Astro.props;
             body, a, button { 
                 cursor: none; 
             }
-
-            /* Restore default cursor on mobile devices using a media query
-               that checks for touch capabilities or smaller screen sizes. */
+            /* Restore default cursor on mobile devices */
             @media (pointer: coarse), (max-width: 768px) {
                 body, a, button {
                     cursor: auto;

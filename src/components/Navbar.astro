@@ -6,8 +6,6 @@ const navLinks = [
     { href: "/contact", text: "Contact" },
 ];
 ---
-<!-- The header and the mobile menu are now separate elements at the root 
-     to prevent layout conflicts. -->
 <>
     <header 
         class="fixed top-0 left-0 w-full z-50 bg-[#F3F3F3]/80 backdrop-blur-md border-b border-black/10" 
@@ -18,15 +16,11 @@ const navLinks = [
                 <a href="/" class="text-base font-bold uppercase tracking-widest hover:text-gray-500">
                     Behelit Systems
                 </a>
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
                     {navLinks.map(link => (
-                        <a href={link.href} class="text-sm font-medium uppercase tracking-wider hover:text-gray-500 transition-colors">
-                            {link.text}
-                        </a>
+                        <a href={link.href} class="text-sm font-medium uppercase tracking-wider hover:text-gray-500 transition-colors">{link.text}</a>
                     ))}
                 </div>
-                <!-- Mobile Menu Open Button -->
                 <button id="mobile-menu-open-button" class="md:hidden p-2">
                      <svg class="w-6 h-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
                 </button>
@@ -34,17 +28,13 @@ const navLinks = [
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="mobile-menu-overlay">
-        <!-- Dedicated Close Button inside the overlay -->
         <button id="mobile-menu-close-button" class="absolute top-6 right-6 p-4 md:top-8 md:right-8">
             <svg class="w-8 h-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M6 18L18 6M6 6l12 12"></path></svg>
         </button>
         <div class="flex flex-col items-center justify-center h-full text-center space-y-8">
             {navLinks.map(link => (
-                <a href={link.href} class="mobile-menu-link block text-4xl font-bold uppercase tracking-wider hover:text-gray-500 transition-colors">
-                    {link.text}
-                </a>
+                <a href={link.href} class="mobile-menu-link block text-4xl font-bold uppercase tracking-wider hover:text-gray-500 transition-colors">{link.text}</a>
             ))}
         </div>
     </div>
@@ -52,23 +42,15 @@ const navLinks = [
 
 <style>
     .mobile-menu-overlay {
-        position: fixed;
-        inset: 0;
-        background-color: #F3F3F3;
-        color: #111111;
-        z-index: 100; /* High z-index to ensure it's on top */
-        opacity: 0;
-        visibility: hidden;
+        position: fixed; inset: 0; background-color: #F3F3F3; color: #111111;
+        z-index: 100; opacity: 0; visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
     }
-    .mobile-menu-overlay.is-open {
-        opacity: 1;
-        visibility: visible;
-    }
+    .mobile-menu-overlay.is-open { opacity: 1; visibility: visible; }
 </style>
 
 <script>
-    function setupMobileMenu() {
+    function initMobileMenu() {
         const openButton = document.getElementById('mobile-menu-open-button');
         const closeButton = document.getElementById('mobile-menu-close-button');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -76,35 +58,20 @@ const navLinks = [
         if (!openButton || !closeButton || !mobileMenu) return;
 
         const openMenu = () => {
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.add('is-open');
+            mobileMenu.classList.add('is-open');
             document.body.style.overflow = 'hidden';
         };
-
         const closeMenu = () => {
-            const menu = document.getElementById('mobile-menu');
-            if (menu) menu.classList.remove('is-open');
+            mobileMenu.classList.remove('is-open');
             document.body.style.overflow = '';
         };
 
-        // A guard to prevent adding duplicate event listeners to the persisted open button.
-        if (openButton.dataset.listenerAttached !== 'true') {
-            openButton.addEventListener('click', openMenu);
-            openButton.dataset.listenerAttached = 'true';
-        }
-
-        // The close button and links are new on each page load, so we can
-        // safely add listeners to them without a guard.
+        openButton.addEventListener('click', openMenu);
         closeButton.addEventListener('click', closeMenu);
-        const links = mobileMenu.querySelectorAll('.mobile-menu-link');
-        links.forEach(link => {
+        mobileMenu.querySelectorAll('.mobile-menu-link').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
     }
-
-    // Run the setup function on the initial, full page load.
-    document.addEventListener('DOMContentLoaded', setupMobileMenu);
-    
-    // Also run the setup function on subsequent page loads when using View Transitions.
-    document.addEventListener('astro:page-load', setupMobileMenu);
+    // Run on initial load and after transitions
+    document.addEventListener('astro:page-load', initMobileMenu);
 </script>

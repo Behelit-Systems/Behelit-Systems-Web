@@ -34,11 +34,9 @@ const services = [
                             <div class="project-tags">{service.tags}</div>
                             <div class="project-number">0{index + 1}</div>
                         </div>
-                        <!-- Image for Mobile View -->
                         <img src={service.image} alt={service.title} class="project-image-mobile" onerror="this.style.display='none'"/>
                     </div>
                 ))}
-                 <!-- Image for Desktop Hover View -->
                 <img src="" alt="Service Preview" id="hover-image-preview" class="hover-image-preview" onerror="this.style.opacity=0;"/>
             </div>
         </div>
@@ -46,75 +44,25 @@ const services = [
 </BaseLayout>
 
 <style>
-.project-block {
-    border-bottom: 1px solid #d1d1d1;
-}
-.project-link-static {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: auto auto;
-    padding: 2rem 0;
-    align-items: center;
-}
-.project-name {
-    grid-column: 1 / 2;
-    grid-row: 1 / 2;
-    font-size: clamp(1.5rem, 5vw, 2.5rem);
-    font-weight: 700;
-}
-.project-tags {
-    grid-column: 1 / 2;
-    grid-row: 2 / 3;
-    font-size: 0.875rem;
-    color: #6b7280;
-}
-.project-number {
-    grid-column: 2 / 3;
-    grid-row: 1 / 3;
-    font-size: 0.875rem;
-    color: #6b7280;
-    justify-self: end;
-}
-/* Mobile Image Styling */
-.project-image-mobile {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-}
-/* Desktop Hover Image Styling */
-.hover-image-preview {
-    display: none;
-    position: fixed;
-    width: 25vw;
-    max-width: 300px;
-    height: auto;
-    border-radius: 20px;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    z-index: 10;
-    transform: translate(-50%, -50%) scale(0.9);
-}
+.project-block { border-bottom: 1px solid #d1d1d1; }
+.project-link-static { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; padding: 2rem 0; align-items: center; }
+.project-name { grid-column: 1 / 2; grid-row: 1 / 2; font-size: clamp(1.5rem, 5vw, 2.5rem); font-weight: 700; }
+.project-tags { grid-column: 1 / 2; grid-row: 2 / 3; font-size: 0.875rem; color: #6b7280; }
+.project-number { grid-column: 2 / 3; grid-row: 1 / 3; font-size: 0.875rem; color: #6b7280; justify-self: end; }
+.project-image-mobile { display: block; width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem; }
+.hover-image-preview { display: none; position: fixed; width: 25vw; max-width: 300px; height: auto; border-radius: 20px; pointer-events: none; opacity: 0; transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: 10; transform: translate(-50%, -50%) scale(0.9); }
 @media (min-width: 768px) {
-    .project-image-mobile {
-        display: none;
-    }
-    .hover-image-preview {
-        display: block;
-    }
+    .project-image-mobile { display: none; }
+    .hover-image-preview { display: block; }
 }
 </style>
 
 <script>
 function initServiceHover() {
     if (window.matchMedia("(pointer: coarse)").matches) return;
-
     const previewImage = document.getElementById('hover-image-preview');
     const blocks = document.querySelectorAll('.project-block');
-
-    if (!previewImage) return;
+    if (!previewImage || !blocks.length) return;
 
     const onMouseMove = (e) => {
         previewImage.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(${previewImage.style.opacity === '1' ? 1 : 0.9})`;
