@@ -3,7 +3,7 @@ const navLinks = [
     { href: "/about", text: "About" },
     { href: "/services", text: "Services" },
     { href: "/community", text: "Community" },
-    { href: "/", text: "Contact" },
+    { href: "/contact", text: "Contact" },
 ];
 ---
 <!-- The header and the mobile menu are now separate elements at the root 
@@ -68,48 +68,46 @@ const navLinks = [
 </style>
 
 <script>
-    // This function sets up all the event listeners for the mobile menu.
-    function initMobileMenu() {
+    function setupMobileMenu() {
         const openButton = document.getElementById('mobile-menu-open-button');
         const closeButton = document.getElementById('mobile-menu-close-button');
         const mobileMenu = document.getElementById('mobile-menu');
 
-        // If any element is missing, we can't proceed.
-        if (!openButton || !closeButton || !mobileMenu) {
-            return;
-        }
+        if (!openButton || !closeButton || !mobileMenu) return;
 
+        // The click handler for the open button.
+        // It finds the menu element *at the time of the click* to avoid issues
+        // with persisted elements and stale references.
         const openMenu = () => {
-            mobileMenu.classList.add('is-open');
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.add('is-open');
             document.body.style.overflow = 'hidden';
         };
 
+        // The click handler for the close button and menu links.
         const closeMenu = () => {
-            mobileMenu.classList.remove('is-open');
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.remove('is-open');
             document.body.style.overflow = '';
         };
 
-        // Prevent adding duplicate event listeners on page transitions
-        if (openButton.dataset.listenerAttached) {
-            return;
+        // A guard to prevent adding multiple click listeners to the persisted open button.
+        if (openButton.dataset.listenerAttached !== 'true') {
+            openButton.addEventListener('click', openMenu);
+            openButton.dataset.listenerAttached = 'true';
         }
 
-        openButton.addEventListener('click', openMenu);
+        // The close button and links are new on each page load, so we can
+        // safely add listeners to them without a guard.
         closeButton.addEventListener('click', closeMenu);
-
         const links = mobileMenu.querySelectorAll('.mobile-menu-link');
         links.forEach(link => {
             link.addEventListener('click', closeMenu);
         });
-
-        // Mark the button so we know listeners are attached.
-        openButton.dataset.listenerAttached = 'true';
     }
 
-    // Run the setup function on the initial page load.
-    document.addEventListener('DOMContentLoaded', initMobileMenu);
-    
-    // Run the setup function on subsequent page loads when using View Transitions.
-    document.addEventListener('astro:page-load', initMobileMenu);
+    // The 'astro:page-load' event is the most reliable way to run scripts
+    // in an Astro project with View Transitions. It fires on the initial
+    // page load and on all subsequent client-side navigations.
+    document.addEventListener('astro:page-load', setupMobileMenu);
 </script>
-
