@@ -1,49 +1,24 @@
 ---
-// This component creates the dynamic, compositional hero section for the homepage.
+// This hero component blends large typography with a subtle compositional layout.
 ---
-<section class="relative min-h-screen w-full flex items-center justify-center p-6 md:p-12 overflow-hidden">
-    <!-- This container uses absolute positioning to place elements in a compositional layout -->
-    <div class="relative w-full max-w-7xl h-[80vh]">
-
-        <!-- Main Title (Centered) -->
-        <div class="absolute inset-0 flex flex-col items-center justify-center">
-            <h1 class="text-6xl md:text-9xl lg:text-[9rem] font-bold tracking-tighter uppercase text-center text-white/90 leading-none">
-                Behelit
-            </h1>
-            <h1 class="text-6xl md:text-9xl lg:text-[9rem] font-bold tracking-tighter uppercase text-center text-white/90 leading-none -mt-2 md:-mt-4">
-                Systems
-            </h1>
+<section class="relative min-h-screen w-full flex flex-col justify-between p-6 md:p-8">
+    <!-- Top left corner info -->
+    <div class="w-full flex justify-between items-start">
+        <div class="text-xs uppercase max-w-[200px]">
+            <p>Specializing in Hardware, Physical, and Human-Factor Security</p>
         </div>
+    </div>
 
-        <!-- Core Services (Top Left) -->
-        <div class="absolute top-0 left-0">
-            <p class="text-sm text-gray-400 uppercase tracking-widest">
-                (01) Hardware<br/>
-                (02) Physical<br/>
-                (03) Social<br/>
-                (04) Defense
-            </p>
-        </div>
+    <!-- Main heading -->
+    <div class="text-center my-auto">
+        <h1 class="text-[10vw] md:text-[12vw] lg:text-[14vw] leading-none font-bold tracking-tighter">
+            BEHELIT<br>SYSTEMS
+        </h1>
+    </div>
 
-        <!-- Bottom row container using Flexbox to prevent overlap -->
-        <div class="absolute bottom-0 left-0 right-0 w-full flex justify-between items-end">
-            <!-- Intro Text (Bottom Left) -->
-            <div>
-                 <div class="text-gray-400 text-sm max-w-sm">
-                    <p class="font-bold text-white mb-2 uppercase tracking-wider">Hidden in Plain Sight</p>
-                    <p>
-                        A premier Malaysian cybersecurity firm engineering unyielding resilience by targeting critical vulnerabilities in hardware, software, and the human element.
-                    </p>
-                </div>
-            </div>
-
-             <!-- Contact Info (Bottom Right) -->
-            <div class="text-right">
-                 <p class="text-sm text-gray-400 uppercase tracking-widest">
-                    Say Hello At<br/>
-                    <a href="mailto:hello@behelitsystems.com" class="font-bold text-white hover:text-gray-300 transition-colors">hello@behelitsystems.com</a>
-                </p>
-            </div>
-        </div>
+    <!-- Bottom row info -->
+    <div class="w-full flex justify-between items-end text-xs uppercase">
+        <p>Based in Subang Jaya, Malaysia</p>
+        <p>Securing What Others Miss™</p>
     </div>
 </section>

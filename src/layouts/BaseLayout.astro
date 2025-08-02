@@ -1,0 +1,39 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from '@components/Navbar.astro';
+import Footer from '@components/Footer.astro';
+import Cursor from '@components/Cursor.tsx';
+import '@styles/global.css';
+
+export interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title} | Behelit Systems</title>
+        <meta name="description" content={description} />
+        <meta name="keywords" content="Hardware Security, Penetration Testing, Social Engineering, Blue Team, Cybersecurity Malaysia" />
+		<ViewTransitions />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-EERWCRMSCP"></script>
+	</head>
+	<body>
+        <Cursor client:load />
+        <Navbar />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+        <style is:global>
+            body, a, button { cursor: none; }
+        </style>
+	</body>
+</html>

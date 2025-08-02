@@ -1,17 +1,16 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
 ---
-<Layout title="404: Not Found" description="The page you're looking for could not be found.">
+<BaseLayout title="404: Not Found" description="The page you're looking for could not be found.">
     <div class="min-h-screen flex items-center justify-center text-center px-4">
         <div>
-            <h1 class="text-9xl md:text-[12rem] font-bold tracking-tighter text-gray-800/50">404</h1>
-            <p class="text-xl md:text-2xl mt-4 font-medium uppercase tracking-widest">Resource Not Found</p>
-            <p class="text-gray-500 mt-2">The page you requested could not be located.</p>
-            <div class="mt-10">
-                <a href="/" class="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-gray-400 transition-colors">
+            <h1 class="text-6xl md:text-8xl font-bold tracking-tight">404</h1>
+            <p class="text-lg text-gray-600 mt-2">Page Not Found</p>
+            <div class="mt-8">
+                <a href="/" class="text-sm font-bold uppercase hover:text-gray-500">
                     Return Home
                 </a>
             </div>
         </div>
     </div>
-</Layout>
+</BaseLayout>

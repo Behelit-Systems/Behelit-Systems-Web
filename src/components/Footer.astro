@@ -1,33 +1,34 @@
 ---
 const currentYear = new Date().getFullYear();
 ---
-<footer class="border-t border-gray-800">
-    <div class="container mx-auto px-6 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+<footer class="p-6 md:p-8">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
             <div>
-                <h3 class="font-bold text-base tracking-widest uppercase mb-3">Behelit Systems</h3>
-                <p class="text-gray-500">Securing What Others Miss.™</p>
+                <h3 class="font-bold tracking-widest uppercase mb-3">Behelit Systems</h3>
+                <p class="text-gray-500">© {currentYear}</p>
             </div>
             <div>
-                <h4 class="font-semibold tracking-wider uppercase text-gray-500 mb-3">Navigate</h4>
+                <h4 class="font-semibold tracking-wider uppercase text-gray-500 mb-3">Menu</h4>
                 <ul class="space-y-2">
-                    <li><a href="/about" class="hover:text-white">About</a></li>
-                    <li><a href="/services" class="hover:text-white">Services</a></li>
-                    <li><a href="/community" class="hover:text-white">Community</a></li>
-                    <li><a href="/contact" class="hover:text-white">Contact</a></li>
+                    <li><a href="/about" class="hover:text-gray-500">About</a></li>
+                    <li><a href="/services" class="hover:text-gray-500">Services</a></li>
+                    <li><a href="/community" class="hover:text-gray-500">Community</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="font-semibold tracking-wider uppercase text-gray-500 mb-3">Connect</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-white">LinkedIn</a></li>
-                    <li><a href="#" class="hover:text-white">Twitter</a></li>
-                    <li><a href="mailto:hello@behelitsystems.com" class="hover:text-white">hello@behelitsystems.com</a></li>
+                    <li><a href="#" class="hover:text-gray-500" target="_blank">LinkedIn</a></li>
+                    <li><a href="#" class="hover:text-gray-500" target="_blank">Twitter</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="mt-12 pt-6 border-t border-gray-800 text-center text-xs text-gray-600">
-            <p>&copy; {currentYear} Behelit Systems. All Rights Reserved. Based in Subang Jaya, Selangor, Malaysia.</p>
+             <div>
+                <h4 class="font-semibold tracking-wider uppercase text-gray-500 mb-3">Contact</h4>
+                <ul class="space-y-2">
+                    <li><a href="/contact" class="hover:text-gray-500">Get in touch</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </footer>
