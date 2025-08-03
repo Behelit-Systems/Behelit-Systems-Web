@@ -17,7 +17,8 @@ const { title, description } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		{/* Updated favicon link with cache-busting query string */}
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} | Behelit Systems</title>
         <meta name="description" content={description} />
