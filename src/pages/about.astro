@@ -2,23 +2,18 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Content from '@components/Content.astro';
 
-// Consolidating the page content into an array for a cleaner structure.
 const aboutPoints = [
     { 
         title: "Our Mission", 
-        text: "To revolutionize security posture by meticulously uncovering and neutralizing critical vulnerabilities in hardware and the human element, providing unparalleled, actionable insights, and fostering a collaborative, resilient cybersecurity ecosystem." 
+        text: "To revolutionize our clients' security posture by uncovering and neutralizing critical vulnerabilities in hardware, physical infrastructure, and the human element, delivering unparalleled trust through proven expertise and superior tools." 
     },
     { 
         title: "Our Vision", 
-        text: "To be the leading and most trusted authority in full-spectrum hardware and human factor security in Southeast Asia and beyond, setting new standards for adversarial simulation and defensive hardening." 
-    },
-    { 
-        title: "Our Approach", 
-        text: "Our foundation is unparalleled global collaboration. We actively forge partnerships with elite researchers from the world's most prestigious security communities, including DEF CON, Black Hat, and Hardwear.io. This formidable global intelligence is directly channeled into our client engagements and cutting-edge training programs." 
+        text: "To be the leading and most trusted authority in full-spectrum hardware and human-factor security in Southeast Asia, setting the global standard for adversarial simulation and defensive hardening." 
     },
     { 
         title: "The Founder", 
-        text: "Behelit Systems was launched in July 2025 by Chew Zhan Hong (Gabe), a security consultant with deep expertise in full-spectrum hardware security, physical penetration testing, and advanced social engineering." 
+        text: "Founded by Chew Zhan Hong (Gabe), who brings an unparalleled 20 years of deep, hands-on experience in hardware hacking and security research. This unique combination of formal academic knowledge and two decades of practical expertise forms the technical and product-development bedrock of the firm." 
     }
 ];
 ---
@@ -28,20 +23,17 @@ const aboutPoints = [
     <Content>
         <div class="max-w-5xl mx-auto pt-28 md:pt-40">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20 md:mb-28">
-                <!-- Text Content -->
                 <div>
                     <h2 class="text-sm uppercase text-gray-500 font-bold mb-4">About /</h2>
                     <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
-                        We are a cybersecurity firm engineering unyielding resilience from silicon to people.
+                        We secure the critical assets that modern businesses are built on—from silicon to staff.
                     </h1>
                 </div>
-                <!-- Image Placeholder -->
                 <div class="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
                     <span class="text-gray-400">Image Placeholder</span>
                 </div>
             </div>
 
-            <!-- Detailed Sections with the new list format -->
             <div class="border-t border-gray-300">
                 {aboutPoints.map((point, index) => (
                     <div class="border-b border-gray-300">

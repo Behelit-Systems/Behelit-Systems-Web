@@ -2,7 +2,6 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Content from '@components/Content.astro';
 
-// New content structure focusing on the community's purpose.
 const communityPoints = [
     { 
         title: "Collaborative Research", 
@@ -13,8 +12,8 @@ const communityPoints = [
         text: "Through intensive workshops, Capture The Flag (CTF) events, and mentorship programs, we are dedicated to cultivating the next generation of cybersecurity talent in Southeast Asia." 
     },
     { 
-        title: "Responsible E-Waste Repurposing", 
-        text: "A core tenet of our community is championing the responsible and innovative repurposing of electronic waste, turning discarded hardware into valuable tools for learning and experimentation." 
+        title: "Community-Driven Authority", 
+        text: "Through cLc, we drive collaborative research and establish Behelit Systems as the leading authority in our field across the region, building trust and a pipeline for future expertise." 
     }
 ];
 ---
@@ -24,19 +23,16 @@ const communityPoints = [
     <Content>
         <div class="max-w-5xl mx-auto pt-28 md:pt-40">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20 md:mb-28">
-                <!-- Text Content -->
                 <div>
                     <h2 class="text-sm uppercase text-gray-500 font-bold mb-4">Community /</h2>
                     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-4">Cult of the LOLCOW (cLc)</h1>
-                    <p class="text-lg text-gray-600">A free, open-source hardware hacking community fostering collaborative research, cultivating next-generation talent, and championing responsible e-waste repurposing.</p>
+                    <p class="text-lg text-gray-600">Our unique strength is amplified by our community initiative, a free, open-source hardware hacking community that establishes Behelit Systems as the leading authority in our field.</p>
                 </div>
-                <!-- Image Placeholder -->
                 <div class="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
                     <span class="text-gray-400">Image Placeholder</span>
                 </div>
             </div>
 
-            <!-- Detailed Sections with the new list format -->
             <div class="border-t border-gray-300">
                 {communityPoints.map((point, index) => (
                     <div class="border-b border-gray-300">

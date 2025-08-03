@@ -5,11 +5,11 @@ import Content from '@components/Content.astro';
 import HomeSection from '@components/HomeSection.astro';
 import ContactBanner from '@components/ContactBanner.astro';
 
+// Updated services based on the new business plan's packages
 const services = [
-    { title: "Hardware Security", tags: "Firmware / Embedded Systems", image: "https://placehold.co/600x400/F3F3F3/111111?text=Hardware" },
-    { title: "Physical Penetration", tags: "Access Control / Red Teaming", image: "https://placehold.co/600x400/F3F3F3/111111?text=Physical" },
-    { title: "Social Engineering", tags: "Phishing / Human Factor", image: "https://placehold.co/600x400/F3F3F3/111111?text=Social" },
-    { title: "Blue Team Defense", tags: "Detection / Incident Response", image: "https://placehold.co/600x400/F3F3F3/111111?text=Defense" },
+    { title: "Baseline Resilience Assessment", tags: "Introductory / Fixed-Fee" },
+    { title: "Adversarial Simulation", tags: "Core Offering / Project-Based" },
+    { title: "Resilience Partnership", tags: "Long-Term / Retainer" },
 ];
 ---
 <BaseLayout 
@@ -19,31 +19,32 @@ const services = [
     <Hero />
 
     <Content>
+        <!-- About Section -->
         <HomeSection title="About">
             <h2 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight">
-                A premier Malaysian firm dedicated to engineering unyielding resilience from silicon to people.
+                At our core, we sell two things: Trust and Expertise. We find the threats hidden in plain sight.
             </h2>
         </HomeSection>
 
+        <!-- Services Section -->
         <HomeSection title="Services">
             <div class="project-list relative border-t border-gray-300">
                 {services.map((service, index) => (
-                    <div class="project-block group" data-image={service.image}>
+                    <div class="project-block group">
                         <a href="/services" class="project-link">
                             <h2 class="project-name">{service.title}</h2>
                             <div class="project-tags">{service.tags}</div>
                             <div class="project-number">0{index + 1}</div>
                         </a>
-                        <img src={service.image} alt={service.title} class="project-image-mobile" onerror="this.style.display='none'"/>
                     </div>
                 ))}
-                <img src="" alt="Service Preview" id="hover-image-preview" class="hover-image-preview" onerror="this.style.opacity=0;"/>
             </div>
         </HomeSection>
 
+        <!-- Community Section -->
         <HomeSection title="Community">
              <h2 class="text-4xl md:text-5xl font-bold leading-tight tracking-tight mb-6">
-                Cultivating the next generation of talent through open-source research.
+                Cultivating next-generation talent and driving collaborative research through cLc.
              </h2>
             <a href="/community" class="text-sm font-bold uppercase hover:text-gray-500 border-b border-black">Learn More about cLc</a>
         </HomeSection>
@@ -59,42 +60,4 @@ const services = [
 .project-tags { grid-column: 1 / 2; grid-row: 2 / 3; font-size: 0.875rem; color: #6b7280; }
 .project-number { grid-column: 2 / 3; grid-row: 1 / 3; font-size: 0.875rem; color: #6b7280; justify-self: end; }
 .project-block:hover .project-name { color: #6b7280; }
-.project-image-mobile { display: block; width: 100%; height: auto; border-radius: 8px; margin-bottom: 1rem; }
-.hover-image-preview { display: none; position: fixed; width: 25vw; max-width: 300px; height: auto; border-radius: 20px; pointer-events: none; opacity: 0; transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); z-index: 10; transform: translate(-50%, -50%) scale(0.9); }
-@media (min-width: 768px) {
-    .project-image-mobile { display: none; }
-    .hover-image-preview { display: block; }
-}
 </style>
-
-<script>
-function initServiceHover() {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
-    const previewImage = document.getElementById('hover-image-preview');
-    const blocks = document.querySelectorAll('.project-block');
-    if (!previewImage || !blocks.length) return;
-
-    const onMouseMove = (e) => {
-        previewImage.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(${previewImage.style.opacity === '1' ? 1 : 0.9})`;
-    };
-    window.addEventListener('mousemove', onMouseMove);
-
-    blocks.forEach(block => {
-        block.addEventListener('mouseenter', (e) => {
-            const imageUrl = block.getAttribute('data-image');
-            previewImage.src = imageUrl;
-            previewImage.style.opacity = '1';
-            previewImage.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
-        });
-        block.addEventListener('mouseleave', (e) => {
-            previewImage.style.opacity = '0';
-            previewImage.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(0.9)`;
-        });
-    });
-
-    document.addEventListener('astro:before-swap', () => {
-        window.removeEventListener('mousemove', onMouseMove);
-    }, { once: true });
-}
-document.addEventListener('astro:page-load', initServiceHover);
-</script>
