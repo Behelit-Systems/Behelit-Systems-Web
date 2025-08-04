@@ -138,52 +138,52 @@ const servicePackages = [
 </style>
 
 <script>
-// This robust script uses event delegation to ensure it works in all environments.
+// This robust script uses event delegation on the document for maximum reliability.
 function initServiceModal() {
-    const cardGrid = document.querySelector('.service-cards-grid');
-    const modal = document.getElementById('service-modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const modalCodename = document.getElementById('modal-codename');
-    const modalDeliverables = document.getElementById('modal-deliverables');
-    const closeBtn = document.getElementById('modal-close-btn');
+    // A guard to prevent this function from running multiple times and attaching duplicate listeners.
+    if (window.serviceModalInitialized) {
+        return;
+    }
+    window.serviceModalInitialized = true;
 
-    if (!cardGrid || !modal || !modalTitle || !modalDescription || !modalCodename || !modalDeliverables || !closeBtn) return;
+    // We attach a single listener to the document. This is the key change.
+    document.addEventListener('click', (e) => {
+        const modal = document.getElementById('service-modal');
+        if (!modal) return;
 
-    const openModal = (card) => {
-        modalTitle.textContent = card.dataset.title;
-        modalDescription.textContent = card.dataset.description;
-        modalCodename.textContent = `// ${card.dataset.codename}`;
-        
-        const deliverables = JSON.parse(card.dataset.deliverables);
-        modalDeliverables.innerHTML = '';
-        deliverables.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            modalDeliverables.appendChild(li);
-        });
-
-        modal.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
-    };
-
-    const closeModal = () => {
-        modal.classList.remove('is-open');
-        document.body.style.overflow = '';
-    };
-
-    // --- Event Delegation ---
-    // A single click listener on the grid container is more reliable than one on each card.
-    cardGrid.addEventListener('click', (e) => {
+        // --- Logic to OPEN the modal ---
         const card = e.target.closest('.service-card-wrapper');
         if (card) {
-            openModal(card);
-        }
-    });
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            const modalCodename = document.getElementById('modal-codename');
+            const modalDeliverables = document.getElementById('modal-deliverables');
 
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
+            if (!modalTitle || !modalDescription || !modalCodename || !modalDeliverables) return;
+
+            modalTitle.textContent = card.dataset.title;
+            modalDescription.textContent = card.dataset.description;
+            modalCodename.textContent = `// ${card.dataset.codename}`;
+            
+            const deliverables = JSON.parse(card.dataset.deliverables);
+            modalDeliverables.innerHTML = '';
+            deliverables.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                modalDeliverables.appendChild(li);
+            });
+
+            modal.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // --- Logic to CLOSE the modal ---
+        const closeBtn = e.target.closest('#modal-close-btn');
+        // Close if the close button is clicked OR if the dark overlay is clicked
+        if (closeBtn || e.target === modal) {
+            modal.classList.remove('is-open');
+            document.body.style.overflow = '';
+        }
     });
 }
 
