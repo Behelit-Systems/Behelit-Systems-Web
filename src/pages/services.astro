@@ -6,7 +6,6 @@ import ServiceCard from '@components/ServiceCard.astro';
 const servicePackages = [
     { 
         title: "The Sentinel Assessment", 
-        subtext: "Foundational Security Overview",
         codename: "Baseline Resilience",
         description: "Our essential starting point for any organization. We provide a comprehensive, non-invasive overview of your security posture, identifying the most critical risks from the outside-in without disrupting your operations.",
         deliverables: [
@@ -18,7 +17,6 @@ const servicePackages = [
     },
     { 
         title: "The Spectre Engagement", 
-        subtext: "Simulated Real-World Attack",
         codename: "Adversarial Simulation",
         description: "Our core offering that simulates a real-world, sophisticated attacker. We go beyond standard penetration testing to challenge your defenses across physical, hardware, and human vectors to uncover vulnerabilities others miss.",
         deliverables: [
@@ -31,7 +29,6 @@ const servicePackages = [
     },
     { 
         title: "The Aegis Partnership", 
-        subtext: "Continuous Security Improvement",
         codename: "Resilience Program",
         description: "A long-term, retainer-based program for continuous security improvement. We become an extension of your team, providing ongoing testing, proactive threat hunting, and regular drills to ensure you are always prepared.",
         deliverables: [
@@ -44,7 +41,6 @@ const servicePackages = [
     },
      { 
         title: "The Chimera Project", 
-        subtext: "Bespoke Security Solutions",
         codename: "Custom Engagement",
         description: "A bespoke engagement tailored to your unique security challenges. This can include specialized hardware reverse engineering, custom tool development, or executive security training designed to address a specific threat.",
         deliverables: [
@@ -75,7 +71,7 @@ const servicePackages = [
             <div class="service-cards-grid">
                 {servicePackages.map((service) => (
                     <div class="service-card-wrapper" data-title={service.title} data-description={service.description} data-codename={service.codename} data-deliverables={JSON.stringify(service.deliverables)}>
-                        <ServiceCard title={service.title} description={service.subtext} />
+                        <ServiceCard title={service.title} />
                     </div>
                 ))}
             </div>
@@ -149,6 +145,9 @@ function initServiceModal() {
 
     if (!modal || !modalTitle || !modalDescription || !modalCodename || !modalDeliverables || !closeBtn) return;
 
+    // Guard to prevent attaching listeners multiple times on page transitions
+    if (modal.dataset.listenerAttached === 'true') return;
+
     const openModal = (card) => {
         modalTitle.textContent = card.dataset.title;
         modalDescription.textContent = card.dataset.description;
@@ -179,6 +178,16 @@ function initServiceModal() {
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
+
+    // Mark as attached to prevent re-initialization
+    modal.dataset.listenerAttached = 'true';
+}
+
+// This robust pattern ensures the script runs correctly in all scenarios.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServiceModal);
+} else {
+    initServiceModal();
 }
 document.addEventListener('astro:page-load', initServiceModal);
 </script>
