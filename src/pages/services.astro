@@ -138,19 +138,18 @@ const servicePackages = [
 </style>
 
 <script>
-// This robust script uses event delegation on the document for maximum reliability.
-function initServiceModal() {
-    // A guard to prevent this function from attaching duplicate listeners.
-    if (document.body.dataset.serviceModalAttached === 'true') {
-        return;
-    }
-    document.body.dataset.serviceModalAttached = 'true';
+// This robust script uses a cleanup/re-initialization pattern for maximum reliability.
 
-    // We attach a single listener to the document. This is more resilient.
-    document.body.addEventListener('click', (e) => {
-        const modal = document.getElementById('service-modal');
-        if (!modal) return;
+// A global variable to hold our main event handler.
+// This makes it easy to add and remove the exact same function, preventing memory leaks.
+let serviceModalClickHandler;
 
+function setupServiceModal() {
+    const modal = document.getElementById('service-modal');
+    if (!modal) return;
+
+    // Define the single, delegated click handler for the entire document.
+    serviceModalClickHandler = (e) => {
         // --- Logic to OPEN the modal ---
         const card = e.target.closest('.service-card-wrapper');
         if (card) {
@@ -183,16 +182,24 @@ function initServiceModal() {
             modal.classList.remove('is-open');
             document.body.style.overflow = '';
         }
-    });
+    };
+
+    // Attach the single, delegated listener to the document body.
+    document.body.addEventListener('click', serviceModalClickHandler);
 }
 
-// This robust pattern ensures the script runs correctly in all scenarios.
-// It runs on the very first load...
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initServiceModal);
-} else {
-    initServiceModal();
+function cleanupServiceModal() {
+    // If the handler exists, remove it. This prevents duplicate listeners.
+    if (serviceModalClickHandler) {
+        document.body.removeEventListener('click', serviceModalClickHandler);
+    }
 }
-// ...and on all subsequent page transitions.
-document.addEventListener('astro:page-load', initServiceModal);
+
+// The 'astro:page-load' event is the most reliable way to run scripts.
+// It fires on the initial page load and on all subsequent client-side navigations.
+document.addEventListener('astro:page-load', setupServiceModal);
+
+// The 'astro:before-swap' event fires just before the page content is replaced.
+// This is the perfect time to clean up our event listeners.
+document.addEventListener('astro:before-swap', cleanupServiceModal);
 </script>
