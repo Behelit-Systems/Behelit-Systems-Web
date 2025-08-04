@@ -141,7 +141,7 @@ const servicePackages = [
 // This robust script uses event delegation on the document for maximum reliability.
 function initServiceModal() {
     // A guard to prevent this function from attaching duplicate listeners.
-    if (document.body.dataset.serviceModalAttached) {
+    if (document.body.dataset.serviceModalAttached === 'true') {
         return;
     }
     document.body.dataset.serviceModalAttached = 'true';
@@ -186,11 +186,7 @@ function initServiceModal() {
     });
 }
 
-// This robust pattern ensures the script runs correctly in all scenarios.
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initServiceModal);
-} else {
-    initServiceModal();
-}
+// The 'astro:page-load' event is the most reliable way to run scripts.
+// It fires on the initial page load and on all subsequent client-side navigations.
 document.addEventListener('astro:page-load', initServiceModal);
 </script>
