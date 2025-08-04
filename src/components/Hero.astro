@@ -47,7 +47,12 @@ const wordMap = [
 
         <!-- Corner Info -->
         <div class="absolute top-0 left-0 text-xs uppercase max-w-[140px] md:max-w-[200px]">
-            <p>Specializing in Hardware, Physical, and Human-Factor Security</p>
+            {/* What you do */}
+            <p>Full-Spectrum Security for Hardware, Physical, and Human Factors</p>
+        </div>
+        <div class="absolute top-0 right-0 text-xs uppercase max-w-[140px] md:max-w-[200px] text-right">
+            {/* What makes you different & why they should care */}
+            <p>Expertise-Driven Engagements to Uncover Hidden Threats</p>
         </div>
         <div class="absolute bottom-0 left-0 text-xs uppercase">
             <p>Based in Kuala Lumpur, Malaysia</p>
@@ -100,39 +105,32 @@ function initHeroTextSwap() {
     const wordFaders = heroSection.querySelectorAll('.word-fader');
     if (!heroSection || !wordFaders.length) return;
 
-    // A more reliable way to check for touch devices.
     const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
     if (isMobile) {
-        // On mobile, swap all words on a single tap of the entire hero area.
+        let isSwapped = false;
         const mobileTapHandler = () => {
-            // Check the state of the first word to determine if we should swap or un-swap.
-            const currentlySwapped = wordFaders[0].classList.contains('is-swapped');
+            isSwapped = !isSwapped;
             wordFaders.forEach(fader => {
-                fader.classList.toggle('is-swapped', !currentlySwapped);
+                fader.classList.toggle('is-swapped', isSwapped);
             });
         };
-        // Use a guard to prevent adding the listener multiple times
         if (!heroSection.dataset.listenerAttached) {
             heroSection.addEventListener('click', mobileTapHandler);
             heroSection.dataset.listenerAttached = 'true';
         }
 
     } else {
-        // On desktop, swap individual words on hover.
         wordFaders.forEach(fader => {
             if (fader.dataset.listenerAttached) return;
-
             const mouseEnterHandler = () => fader.classList.add('is-swapped');
             const mouseLeaveHandler = () => fader.classList.remove('is-swapped');
-            
             fader.addEventListener('mouseenter', mouseEnterHandler);
             fader.addEventListener('mouseleave', mouseLeaveHandler);
             fader.dataset.listenerAttached = 'true';
         });
     }
 }
-// This robust pattern ensures the script runs correctly in all scenarios.
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initHeroTextSwap);
 } else {

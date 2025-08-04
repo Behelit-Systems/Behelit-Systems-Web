@@ -1,0 +1,81 @@
+---
+// This component displays a single service in a styled card.
+// It accepts a title and an optional description (subtext).
+interface Props {
+    title: string;
+    description?: string;
+}
+const { title, description } = Astro.props;
+---
+<div class="card">
+    <div class="card-content">
+        <h3 class="card-title">{title}</h3>
+        {description && <p class="card-description">{description}</p>}
+    </div>
+    <div class="card-icon-wrapper">
+        <div class="card-icon">
+            <!-- Simple info icon SVG -->
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 7H13V9H11V7ZM11 11H13V17H11V11ZM12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="currentColor"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb; /* border-gray-200 */
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes content and icon apart */
+    min-height: 180px;
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.card-content {
+    text-align: center; /* Center the text content */
+    flex-grow: 1; /* Allow content to take up available space */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center text within its area */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.card-description {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-top: 0.75rem;
+}
+
+.card-icon-wrapper {
+    display: flex;
+    justify-content: flex-end; /* Align icon to the right */
+    width: 100%;
+}
+
+.card-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+}
+</style>
