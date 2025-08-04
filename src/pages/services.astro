@@ -140,14 +140,14 @@ const servicePackages = [
 <script>
 // This robust script uses event delegation on the document for maximum reliability.
 function initServiceModal() {
-    // A guard to prevent this function from running multiple times and attaching duplicate listeners.
-    if (window.serviceModalInitialized) {
+    // A guard to prevent this function from attaching duplicate listeners.
+    if (document.body.dataset.serviceModalAttached) {
         return;
     }
-    window.serviceModalInitialized = true;
+    document.body.dataset.serviceModalAttached = 'true';
 
-    // We attach a single listener to the document. This is the key change.
-    document.addEventListener('click', (e) => {
+    // We attach a single listener to the document. This is more resilient.
+    document.body.addEventListener('click', (e) => {
         const modal = document.getElementById('service-modal');
         if (!modal) return;
 
@@ -179,7 +179,6 @@ function initServiceModal() {
 
         // --- Logic to CLOSE the modal ---
         const closeBtn = e.target.closest('#modal-close-btn');
-        // Close if the close button is clicked OR if the dark overlay is clicked
         if (closeBtn || e.target === modal) {
             modal.classList.remove('is-open');
             document.body.style.overflow = '';
@@ -187,8 +186,11 @@ function initServiceModal() {
     });
 }
 
-// The 'astro:page-load' event is the most reliable way to run scripts
-// in an Astro project with View Transitions. It fires on the initial
-// page load and on all subsequent client-side navigations.
+// This robust pattern ensures the script runs correctly in all scenarios.
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServiceModal);
+} else {
+    initServiceModal();
+}
 document.addEventListener('astro:page-load', initServiceModal);
 </script>
