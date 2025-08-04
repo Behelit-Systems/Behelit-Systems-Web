@@ -138,9 +138,9 @@ const servicePackages = [
 </style>
 
 <script>
-// This is the robust script that will run on every page load.
+// This robust script uses event delegation to ensure it works in all environments.
 function initServiceModal() {
-    const cards = document.querySelectorAll('.service-card-wrapper');
+    const cardGrid = document.querySelector('.service-cards-grid');
     const modal = document.getElementById('service-modal');
     const modalTitle = document.getElementById('modal-title');
     const modalDescription = document.getElementById('modal-description');
@@ -148,7 +148,7 @@ function initServiceModal() {
     const modalDeliverables = document.getElementById('modal-deliverables');
     const closeBtn = document.getElementById('modal-close-btn');
 
-    if (!modal || !modalTitle || !modalDescription || !modalCodename || !modalDeliverables || !closeBtn) return;
+    if (!cardGrid || !modal || !modalTitle || !modalDescription || !modalCodename || !modalDeliverables || !closeBtn) return;
 
     const openModal = (card) => {
         modalTitle.textContent = card.dataset.title;
@@ -172,13 +172,13 @@ function initServiceModal() {
         document.body.style.overflow = '';
     };
 
-    // Attach click listeners to each card
-    cards.forEach(card => {
-        // A simple trick to remove old listeners before adding new ones,
-        // preventing bugs during page transitions.
-        const newCard = card.cloneNode(true);
-        card.parentNode.replaceChild(newCard, card);
-        newCard.addEventListener('click', () => openModal(newCard));
+    // --- Event Delegation ---
+    // A single click listener on the grid container is more reliable than one on each card.
+    cardGrid.addEventListener('click', (e) => {
+        const card = e.target.closest('.service-card-wrapper');
+        if (card) {
+            openModal(card);
+        }
     });
 
     closeBtn.addEventListener('click', closeModal);
