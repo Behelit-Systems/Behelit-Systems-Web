@@ -1,57 +1,27 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Content from '@components/Content.astro';
-import ServiceCard from '@components/ServiceCard.astro';
 
 const servicePackages = [
     { 
         title: "The Sentinel Assessment", 
         subtext: "Foundational Security Overview",
-        codename: "Baseline Resilience",
-        description: "Our essential starting point for any organization. We provide a comprehensive, non-invasive overview of your security posture, identifying the most critical risks from the outside-in without disrupting your operations.",
-        deliverables: [
-            "External Network Scan & Analysis",
-            "Open-Source Intelligence (OSINT) Report",
-            "Baseline Phishing Campaign & Report",
-            "Executive Risk Summary"
-        ]
+        description: "Our essential starting point for any organization. We provide a comprehensive, non-invasive overview of your security posture, identifying the most critical risks from the outside-in without disrupting your operations."
     },
     { 
         title: "The Spectre Engagement", 
         subtext: "Simulated Real-World Attack",
-        codename: "Adversarial Simulation",
-        description: "Our core offering that simulates a real-world, sophisticated attacker. We go beyond standard penetration testing to challenge your defenses across physical, hardware, and human vectors to uncover vulnerabilities others miss.",
-        deliverables: [
-            "Aggressive Physical Penetration Test",
-            "Hardware Teardown & Analysis",
-            "Multi-Vector Social Engineering Campaign",
-            "Detailed Attack Path Report",
-            "Remediation Roadmap"
-        ]
+        description: "Our core offering that simulates a real-world, sophisticated attacker. We go beyond standard penetration testing to challenge your defenses across physical, hardware, and human vectors to uncover vulnerabilities others miss."
     },
     { 
         title: "The Aegis Partnership", 
         subtext: "Continuous Security Improvement",
-        codename: "Resilience Program",
-        description: "A long-term, retainer-based program for continuous security improvement. We become an extension of your team, providing ongoing testing, proactive threat hunting, and regular drills to ensure you are always prepared.",
-        deliverables: [
-            "All Spectre Engagement Deliverables",
-            "Ongoing Blue Team Consulting",
-            "Proactive Threat Hunting",
-            "Quarterly Security Drills & Training",
-            "Priority Incident Response Support"
-        ]
+        description: "A long-term, retainer-based program for continuous security improvement. We become an extension of your team, providing ongoing testing, proactive threat hunting, and regular drills to ensure you are always prepared."
     },
      { 
         title: "The Chimera Project", 
         subtext: "Bespoke Security Solutions",
-        codename: "Custom Engagement",
-        description: "A bespoke engagement tailored to your unique security challenges. This can include specialized hardware reverse engineering, custom tool development, or executive security training designed to address a specific threat.",
-        deliverables: [
-            "Custom Statement of Work (SOW)",
-            "Specialized Research & Development",
-            "Tailored Reporting & Briefings"
-        ]
+        description: "A bespoke engagement tailored to your unique security challenges. This can include specialized hardware reverse engineering, custom tool development, or executive security training designed to address a specific threat."
     }
 ];
 ---
@@ -67,139 +37,23 @@ const servicePackages = [
                         Expert-led security services designed to provide unyielding resilience.
                     </h1>
                 </div>
-                <div class="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
-                    <span class="text-gray-400">Image Placeholder</span>
+                <div class="w-full h-80 bg-transparent rounded-lg flex items-center justify-center p-8">
+                    <img src="/services.webp" alt="Services Logo" class="w-full h-full object-contain" />
                 </div>
             </div>
 
-            <div class="service-cards-grid">
-                {servicePackages.map((service) => (
-                    <div class="service-card-wrapper" data-title={service.title} data-description={service.description} data-codename={service.codename} data-deliverables={JSON.stringify(service.deliverables)}>
-                        <ServiceCard title={service.title} description={service.subtext} />
+            <div class="border-t border-gray-300">
+                {servicePackages.map((service, index) => (
+                    <div class="border-b border-gray-300">
+                        <div class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] items-center gap-x-4 py-8">
+                            <h2 class="text-2xl md:text-3xl font-bold col-start-1 row-start-1">{service.title}</h2>
+                            <p class="text-gray-700 mt-2 leading-relaxed col-start-1 row-start-2">{service.description}</p>
+                            <span class="text-xs text-gray-400 col-start-2 row-start-1 row-span-2 justify-self-end self-start pt-2">0{index + 1}</span>
+                        </div>
                     </div>
                 ))}
             </div>
         </div>
     </Content>
-
-    <!-- Modal for displaying service details -->
-    <div id="service-modal" class="modal-overlay">
-        <div class="modal-content">
-            <button id="modal-close-btn" class="modal-close-btn">&times;</button>
-            <div id="modal-codename" class="modal-codename"></div>
-            <h2 id="modal-title" class="modal-title"></h2>
-            <p id="modal-description" class="modal-description"></p>
-            <div class="mt-6">
-                <h3 class="text-sm font-bold uppercase text-gray-500 mb-2">Key Deliverables</h3>
-                <ul id="modal-deliverables" class="list-disc list-inside text-gray-600 space-y-1">
-                    {/* JS will populate this */}
-                </ul>
-            </div>
-        </div>
-    </div>
 </BaseLayout>
 
-<style>
-.service-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    perspective: 1000px;
-}
-.modal-overlay {
-    position: fixed; inset: 0; background-color: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(5px); display: flex; align-items: center; justify-content: center;
-    z-index: 1000; opacity: 0; visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.modal-overlay.is-open { opacity: 1; visibility: visible; }
-.modal-content {
-    background: white; padding: 2.5rem; border-radius: 12px;
-    max-width: 500px; width: 90%; position: relative;
-    transform: scale(0.95); transition: transform 0.3s ease;
-}
-.modal-overlay.is-open .modal-content { transform: scale(1); }
-.modal-close-btn {
-    position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem;
-    background: none; border: none; cursor: pointer; color: #9ca3af;
-}
-.modal-close-btn:hover { color: #111827; }
-.modal-codename {
-    font-family: 'Inter', sans-serif;
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    color: #6b7280;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    margin-bottom: 0.5rem;
-}
-.modal-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
-.modal-description { color: #4b5563; line-height: 1.6; }
-</style>
-
-<script>
-// This robust script uses a cleanup/re-initialization pattern for maximum reliability.
-
-// A global variable to hold our main event handler.
-// This makes it easy to add and remove the exact same function, preventing memory leaks.
-let serviceModalClickHandler;
-
-function setupServiceModal() {
-    const modal = document.getElementById('service-modal');
-    if (!modal) return;
-
-    // Define the single, delegated click handler for the entire document.
-    serviceModalClickHandler = (e) => {
-        // --- Logic to OPEN the modal ---
-        const card = e.target.closest('.service-card-wrapper');
-        if (card) {
-            const modalTitle = document.getElementById('modal-title');
-            const modalDescription = document.getElementById('modal-description');
-            const modalCodename = document.getElementById('modal-codename');
-            const modalDeliverables = document.getElementById('modal-deliverables');
-
-            if (!modalTitle || !modalDescription || !modalCodename || !modalDeliverables) return;
-
-            modalTitle.textContent = card.dataset.title;
-            modalDescription.textContent = card.dataset.description;
-            modalCodename.textContent = `// ${card.dataset.codename}`;
-            
-            const deliverables = JSON.parse(card.dataset.deliverables);
-            modalDeliverables.innerHTML = '';
-            deliverables.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = item;
-                modalDeliverables.appendChild(li);
-            });
-
-            modal.classList.add('is-open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // --- Logic to CLOSE the modal ---
-        const closeBtn = e.target.closest('#modal-close-btn');
-        if (closeBtn || e.target === modal) {
-            modal.classList.remove('is-open');
-            document.body.style.overflow = '';
-        }
-    };
-
-    // Attach the single, delegated listener to the document body.
-    document.body.addEventListener('click', serviceModalClickHandler);
-}
-
-function cleanupServiceModal() {
-    // If the handler exists, remove it. This prevents duplicate listeners.
-    if (serviceModalClickHandler) {
-        document.body.removeEventListener('click', serviceModalClickHandler);
-    }
-}
-
-// The 'astro:page-load' event is the most reliable way to run scripts.
-// It fires on the initial page load and on all subsequent client-side navigations.
-document.addEventListener('astro:page-load', setupServiceModal);
-
-// The 'astro:before-swap' event fires just before the page content is replaced.
-// This is the perfect time to clean up our event listeners.
-document.addEventListener('astro:before-swap', cleanupServiceModal);
-</script>
