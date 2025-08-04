@@ -1,52 +1,107 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Content from '@components/Content.astro';
+import HomeSection from '@components/HomeSection.astro'; // Using the consistent section component
 
-// Consolidating the page content into an array for a cleaner structure.
-const aboutPoints = [
+// Updated and expanded content sections for a more comprehensive page.
+const coreFocusAreas = [
     { 
-        title: "Our Mission", 
-        text: "To revolutionize our clients' security posture by uncovering and neutralizing critical vulnerabilities in hardware, physical infrastructure, and the human element, delivering unparalleled trust through proven expertise and superior tools." 
+        title: "Hardware & Embedded Systems", 
+        text: "We analyze the circuit boards and firmware that power your devices, uncovering vulnerabilities at the silicon level that software-only assessments will always miss." 
     },
     { 
-        title: "Our Vision", 
-        text: "To be the leading and most trusted authority in full-spectrum hardware and human-factor security in Southeast Asia, setting the global standard for adversarial simulation and defensive hardening." 
+        title: "Physical Infrastructure", 
+        text: "Our team tests the real-world security of your facilities, from locks and access controls to environmental defenses, simulating sophisticated intrusion attempts." 
     },
     { 
-        title: "The Founder", 
-        text: "Founded by Chew Zhan Hong (Gabe), who brings an unparalleled 20 years of deep, hands-on experience in hardware hacking and security research. This unique combination of formal academic knowledge and two decades of practical expertise forms the technical and product-development bedrock of the firm." 
+        title: "The Human Element", 
+        text: "We assess the susceptibility of your staff to advanced social engineering and scams, providing actionable training to turn your weakest link into a line of defense." 
+    },
+    { 
+        title: "Defensive Hardening", 
+        text: "Beyond finding flaws, we help you fix them. Our expertise includes proactive blue team defense, detection engineering, and threat hunting to build a truly resilient security posture." 
     }
 ];
+
+const labEquipment = [
+    { category: "Soldering & Rework Stations", examples: "For fine-pitch component analysis and modification." },
+    { category: "Test & Measurement Tools", examples: "Oscilloscopes and logic analyzers to observe and understand device behavior." },
+    { category: "RF Hacking & Analysis", examples: "Software-Defined Radios (SDRs) to intercept and analyze wireless protocols." },
+    { category: "Prototyping & Device Interaction", examples: "High-resolution 3D printers and JTAG/SWD debug probes for in-depth interaction." }
+];
+
+const ourEdgePoints = [
+    { 
+        title: "Decades of Experience", 
+        text: "Founded by Chew Zhan Hong (Gabe), who brings an unparalleled 20 years of deep, hands-on experience in hardware hacking and security research, forming the technical bedrock of the firm." 
+    },
+    { 
+        title: "Community-Driven Authority", 
+        text: "Our unique strength is amplified by our community initiative, Cult of the LOLCOW (cLc), which establishes Behelit Systems as a leading authority in our field through collaborative, open-source research." 
+    }
+]
 ---
 <BaseLayout 
     title="About"
     description="Learn about Behelit Systems, our mission, vision, and the global intelligence network that powers our advanced security services.">
     <Content>
-        <div class="max-w-5xl mx-auto pt-28 md:pt-40">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-20 md:mb-28">
-                <!-- Text Content -->
+        <div class="pt-28 md:pt-40">
+            <!-- Main Title Section -->
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="text-sm uppercase text-gray-500 font-bold mb-4">About /</h2>
                     <h1 class="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
                         We secure the critical assets that modern businesses are built on—from silicon to staff.
                     </h1>
                 </div>
-                <!-- Image Placeholder updated to use a transparent background -->
                 <div class="w-full h-80 bg-transparent rounded-lg flex items-center justify-center p-8">
                     <img src="/logo.webp" alt="Behelit Systems Logo" class="w-full h-full object-contain" />
                 </div>
             </div>
 
-            <div class="border-t border-gray-300">
-                {aboutPoints.map((point, index) => (
-                    <div class="border-b border-gray-300">
-                        <div class="grid grid-cols-[1fr_auto] grid-rows-[auto_auto] items-center gap-x-4 py-8">
-                            <h2 class="text-2xl md:text-3xl font-bold col-start-1 row-start-1">{point.title}</h2>
-                            <p class="text-gray-700 mt-2 leading-relaxed col-start-1 row-start-2">{point.text}</p>
-                            <span class="text-xs text-gray-400 col-start-2 row-start-1 row-span-2 justify-self-end self-start pt-2">0{index + 1}</span>
-                        </div>
+            <!-- New Detailed Sections -->
+            <div class="mt-20 md:mt-28">
+                <HomeSection title="Our Philosophy">
+                    <p class="text-2xl md:text-3xl font-bold leading-snug text-gray-800">
+                        At our core, we sell two things: Trust and Expertise. We provide clients with the confidence that their operations are resilient enough to withstand a sophisticated, multi-faceted attack.
+                    </p>
+                </HomeSection>
+
+                <HomeSection title="Our Core Disciplines">
+                    <div class="border-t border-gray-300">
+                        {coreFocusAreas.map((area) => (
+                            <div class="border-b border-gray-300 py-6">
+                                <h3 class="text-xl font-bold">{area.title}</h3>
+                                <p class="text-gray-600 mt-2">{area.text}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
+                </HomeSection>
+
+                 <HomeSection title="The Lab">
+                    <p class="text-lg text-gray-800 leading-relaxed mb-8 font-bold">
+                        Our capabilities are backed by a professional-grade hardware lab equipped with the industry-standard tools required for deep analysis, reverse engineering, and product R&D.
+                    </p>
+                    <div class="border-t border-gray-300">
+                        {labEquipment.map((item) => (
+                            <div class="border-b border-gray-300 py-4">
+                                <h4 class="font-bold text-md">{item.category}</h4>
+                                <p class="text-sm text-gray-500">{item.examples}</p>
+                            </div>
+                        ))}
+                    </div>
+                </HomeSection>
+
+                <HomeSection title="Our Edge">
+                    <div class="border-t border-gray-300">
+                        {ourEdgePoints.map((point) => (
+                             <div class="border-b border-gray-300 py-6">
+                                <h4 class="font-bold text-black text-xl">{point.title}</h4>
+                                <p class="text-gray-700 mt-2 leading-relaxed">{point.text}</p>
+                            </div>
+                        ))}
+                    </div>
+                </HomeSection>
             </div>
         </div>
     </Content>
