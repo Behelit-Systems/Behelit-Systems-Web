@@ -6,6 +6,7 @@ import ServiceCard from '@components/ServiceCard.astro';
 const servicePackages = [
     { 
         title: "The Sentinel Assessment", 
+        subtext: "Foundational Security Overview",
         codename: "Baseline Resilience",
         description: "Our essential starting point for any organization. We provide a comprehensive, non-invasive overview of your security posture, identifying the most critical risks from the outside-in without disrupting your operations.",
         deliverables: [
@@ -17,6 +18,7 @@ const servicePackages = [
     },
     { 
         title: "The Spectre Engagement", 
+        subtext: "Simulated Real-World Attack",
         codename: "Adversarial Simulation",
         description: "Our core offering that simulates a real-world, sophisticated attacker. We go beyond standard penetration testing to challenge your defenses across physical, hardware, and human vectors to uncover vulnerabilities others miss.",
         deliverables: [
@@ -29,6 +31,7 @@ const servicePackages = [
     },
     { 
         title: "The Aegis Partnership", 
+        subtext: "Continuous Security Improvement",
         codename: "Resilience Program",
         description: "A long-term, retainer-based program for continuous security improvement. We become an extension of your team, providing ongoing testing, proactive threat hunting, and regular drills to ensure you are always prepared.",
         deliverables: [
@@ -41,6 +44,7 @@ const servicePackages = [
     },
      { 
         title: "The Chimera Project", 
+        subtext: "Bespoke Security Solutions",
         codename: "Custom Engagement",
         description: "A bespoke engagement tailored to your unique security challenges. This can include specialized hardware reverse engineering, custom tool development, or executive security training designed to address a specific threat.",
         deliverables: [
@@ -63,15 +67,15 @@ const servicePackages = [
                         Expert-led security services designed to provide unyielding resilience.
                     </h1>
                 </div>
-                <div class="w-full h-80 bg-transparent rounded-lg flex items-center justify-center p-8">
-                    <img src="/services.webp" alt="Services Element" class="w-full h-full object-contain" />
+                <div class="w-full h-80 bg-gray-200 rounded-lg flex items-center justify-center">
+                    <span class="text-gray-400">Image Placeholder</span>
                 </div>
             </div>
 
             <div class="service-cards-grid">
                 {servicePackages.map((service) => (
                     <div class="service-card-wrapper" data-title={service.title} data-description={service.description} data-codename={service.codename} data-deliverables={JSON.stringify(service.deliverables)}>
-                        <ServiceCard title={service.title} />
+                        <ServiceCard title={service.title} description={service.subtext} />
                     </div>
                 ))}
             </div>
@@ -134,6 +138,7 @@ const servicePackages = [
 </style>
 
 <script>
+// This is the robust script that will run on every page load.
 function initServiceModal() {
     const cards = document.querySelectorAll('.service-card-wrapper');
     const modal = document.getElementById('service-modal');
@@ -145,16 +150,13 @@ function initServiceModal() {
 
     if (!modal || !modalTitle || !modalDescription || !modalCodename || !modalDeliverables || !closeBtn) return;
 
-    // Guard to prevent attaching listeners multiple times on page transitions
-    if (modal.dataset.listenerAttached === 'true') return;
-
     const openModal = (card) => {
         modalTitle.textContent = card.dataset.title;
         modalDescription.textContent = card.dataset.description;
         modalCodename.textContent = `// ${card.dataset.codename}`;
         
         const deliverables = JSON.parse(card.dataset.deliverables);
-        modalDeliverables.innerHTML = ''; // Clear previous items
+        modalDeliverables.innerHTML = '';
         deliverables.forEach(item => {
             const li = document.createElement('li');
             li.textContent = item;
@@ -170,24 +172,23 @@ function initServiceModal() {
         document.body.style.overflow = '';
     };
 
+    // Attach click listeners to each card
     cards.forEach(card => {
-        card.addEventListener('click', () => openModal(card));
+        // A simple trick to remove old listeners before adding new ones,
+        // preventing bugs during page transitions.
+        const newCard = card.cloneNode(true);
+        card.parentNode.replaceChild(newCard, card);
+        newCard.addEventListener('click', () => openModal(newCard));
     });
 
     closeBtn.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
         if (e.target === modal) closeModal();
     });
-
-    // Mark as attached to prevent re-initialization
-    modal.dataset.listenerAttached = 'true';
 }
 
-// This robust pattern ensures the script runs correctly in all scenarios.
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initServiceModal);
-} else {
-    initServiceModal();
-}
+// The 'astro:page-load' event is the most reliable way to run scripts
+// in an Astro project with View Transitions. It fires on the initial
+// page load and on all subsequent client-side navigations.
 document.addEventListener('astro:page-load', initServiceModal);
 </script>
