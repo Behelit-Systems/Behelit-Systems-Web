@@ -186,7 +186,13 @@ function initServiceModal() {
     });
 }
 
-// The 'astro:page-load' event is the most reliable way to run scripts.
-// It fires on the initial page load and on all subsequent client-side navigations.
+// This robust pattern ensures the script runs correctly in all scenarios.
+// It runs on the very first load...
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initServiceModal);
+} else {
+    initServiceModal();
+}
+// ...and on all subsequent page transitions.
 document.addEventListener('astro:page-load', initServiceModal);
 </script>
