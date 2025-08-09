@@ -2,20 +2,19 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Content from '@components/Content.astro';
 
-
-
+// New content structure focusing on the community's benefits to clients.
 const communityPoints = [
     { 
-        title: "Collaborative Research", 
-        text: "We actively foster a collaborative environment where members can work together on cutting-edge hardware security research, share findings, and contribute to open-source projects." 
+        title: "Driving Innovation", 
+        text: "The cLc community acts as our open-source R&D engine, keeping our team at the absolute forefront of emerging hardware threats and exploitation techniques." 
     },
     { 
-        title: "Talent Cultivation", 
-        text: "Through intensive workshops, Capture The Flag (CTF) events, and mentorship programs, we are dedicated to cultivating the next generation of cybersecurity talent in Southeast Asia." 
+        title: "Cultivating Expertise", 
+        text: "We identify and nurture the brightest minds in hardware security, ensuring our consulting team is composed of the most dedicated and knowledgeable experts in the field." 
     },
     { 
-        title: "Community-Driven Authority", 
-        text: "Through cLc, we drive collaborative research and establish Behelit Systems as the leading authority in our field across the region, building trust and a pipeline for future expertise." 
+        title: "Demonstrating Authority", 
+        text: "Our leadership and contributions within the community build unparalleled trust and transparently demonstrate our deep expertise in a way no corporate brochure ever could." 
     }
 ];
 ---
@@ -28,7 +27,13 @@ const communityPoints = [
                 <div>
                     <h2 class="text-sm uppercase text-gray-500 font-bold mb-4">Community /</h2>
                     <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-4">Cult of the LOLCOW (cLc)</h1>
-                    <p class="text-lg text-gray-600">Our unique strength is amplified by our community initiative, a free, open-source hardware hacking community that establishes Behelit Systems as the leading authority in our field.</p>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Our unique strength is amplified by our community initiative. It's how we stay sharp, cultivate talent, and give back to the security ecosystem.
+                    </p>
+                    {/* CTA Button is now part of the hero section */}
+                    <a href="http://www.cultlolcow.com" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-3 border border-black rounded-full text-sm font-bold text-black bg-transparent hover:bg-black hover:text-white transition-colors uppercase">
+                        Visit the cLc Website
+                    </a>
                 </div>
                 <!-- Image Placeholder updated to use clc-logo.webp -->
                 <div class="w-full h-80 bg-transparent rounded-lg flex items-center justify-center p-8">
@@ -36,6 +41,7 @@ const communityPoints = [
                 </div>
             </div>
 
+            {/* Redesigned sections using the consistent grid system from other pages */}
             <div class="border-t border-gray-300">
                 {communityPoints.map((point, index) => (
                     <div class="border-b border-gray-300">
